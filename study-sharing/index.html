@@ -629,11 +629,11 @@ let subjects = JSON.parse(localStorage.getItem('subjects')) || [
   name:'Software Quality Assurance',
   icon:'💻',
   status:'Đang học',
-  desc:'Tài liệu kiểm thử phần mềm, SQA, review và automation testing.',
+  desc:'Tài liệu kiểm thử phần mềm, SQA, review và automation testing. Dùng để hệ thống hoá bài học và checklist chất lượng.',
   links:[
     {
-      title:'Tài liệu SQA',
-      url:'https://example.com/sqa'
+      title:'SQA Learning Notes (Repo)',
+      url:'https://github.com/Giangvp689/He_Thong_Thong_Tin_Dia_Ly_GIS'
     }
   ]
 }
@@ -682,7 +682,7 @@ function renderSubjects(){
 
         ${subject.links.map(link => `
 
-          <a class="study-link" href="${link.url}" target="_blank">
+          <a class="study-link" href="${link.url}" target="_blank" rel="noopener noreferrer">
 
             <div class="link-left">
 
@@ -703,6 +703,7 @@ function renderSubjects(){
           </a>
 
         `).join('')}
+
 
       </div>
 
