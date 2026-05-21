@@ -5,579 +5,521 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trần Trường Giang — Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  :root {
-    --bg: #0a0a0f;
-    --bg2: #111118;
-    --bg3: #1a1a24;
-    --accent: #6ee7b7;
-    --accent2: #818cf8;
-    --text: #e8e8f0;
-    --muted: #7070a0;
-    --border: rgba(110,231,183,0.15);
-    --mono: 'Space Mono', monospace;
-    --display: 'Syne', sans-serif;
-  }
+:root {
+  --white: #ffffff;
+  --bg: #f0f7ff;
+  --bg2: #e8f3ff;
+  --card: rgba(255,255,255,0.85);
+  --card-border: rgba(96,165,250,0.25);
+  --blue-light: #dbeafe;
+  --blue: #3b82f6;
+  --blue-mid: #2563eb;
+  --blue-dark: #1d4ed8;
+  --teal: #0ea5e9;
+  --text: #0f172a;
+  --text2: #334155;
+  --muted: #64748b;
+  --mono: 'Fira Code', monospace;
+  --sans: 'Plus Jakarta Sans', sans-serif;
+}
 
-  html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--mono);
-    font-size: 14px;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
 
-  /* --- NAV --- */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 1.2rem 3rem;
-    display: flex; justify-content: space-between; align-items: center;
-    background: rgba(10,10,15,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: 1.2rem;
-    color: var(--accent);
-    letter-spacing: -0.02em;
-  }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--accent); }
+/* GRADIENT BG */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: -1;
+  background:
+    radial-gradient(ellipse 80% 50% at 10% 0%, rgba(186,230,253,0.6) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(219,234,254,0.7) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 50% 100%, rgba(224,242,254,0.5) 0%, transparent 60%),
+    linear-gradient(180deg, #f0f7ff 0%, #e8f3ff 50%, #f5f9ff 100%);
+}
 
-  /* --- HERO --- */
-  #hero {
-    min-height: 100vh;
-    display: flex; align-items: center;
-    padding: 8rem 3rem 4rem;
-    position: relative;
-    overflow: hidden;
-  }
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 2rem;
+  height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(96,165,250,0.2);
+  box-shadow: 0 1px 20px rgba(59,130,246,0.08);
+}
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--blue-mid);
+  display: flex; align-items: center; gap: 8px;
+}
+.nav-logo::before {
+  content: '';
+  width: 8px; height: 8px;
+  background: var(--blue);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
+.nav-links { display: flex; gap: 0.5rem; list-style: none; }
+.nav-links a {
+  padding: 6px 14px;
+  border-radius: 20px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.nav-links a:hover { background: var(--blue-light); color: var(--blue-dark); }
 
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(110,231,183,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(110,231,183,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
-  }
+/* HERO */
+#hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 5rem 2rem 3rem;
+  text-align: center;
+  position: relative;
+}
+.hero-inner { max-width: 700px; }
 
-  .hero-glow {
-    position: absolute;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(110,231,183,0.08) 0%, transparent 70%);
-    top: -100px; right: -100px;
-    pointer-events: none;
-  }
+/* Avatar from GitHub */
+.avatar-wrap {
+  position: relative; display: inline-block; margin-bottom: 1.5rem;
+}
+.avatar-ring {
+  position: absolute; inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #0ea5e9, #6366f1);
+  animation: spin 6s linear infinite;
+  z-index: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.avatar-inner {
+  position: relative; z-index: 1;
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  border: 3px solid white;
+  overflow: hidden;
+  background: var(--blue-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem;
+}
+.avatar-inner img {
+  width: 100%; height: 100%;
+  object-fit: cover; border-radius: 50%;
+}
 
-  .hero-content { max-width: 800px; position: relative; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 14px;
+  background: var(--blue-light);
+  border: 1px solid rgba(59,130,246,0.3);
+  border-radius: 20px;
+  font-size: 12px; font-weight: 600;
+  color: var(--blue-dark);
+  margin-bottom: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
 
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 6px 14px;
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    font-size: 12px;
-    color: var(--accent);
-    margin-bottom: 2rem;
-    animation: fadeUp 0.6s ease both;
-  }
-  .hero-tag::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
+.hero-name {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #1d4ed8 0%, #0ea5e9 50%, #6366f1 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-  .hero-name {
-    font-family: var(--display);
-    font-size: clamp(3rem, 8vw, 6rem);
-    font-weight: 800;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    margin-bottom: 1rem;
-    animation: fadeUp 0.6s 0.1s ease both;
-  }
-  .hero-name span { color: var(--accent); }
+.hero-username {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  color: var(--blue);
+  margin-bottom: 1rem;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.hero-username a { color: var(--blue); text-decoration: none; transition: color 0.2s; }
+.hero-username a:hover { color: var(--blue-dark); text-decoration: underline; }
 
-  .hero-role {
-    font-size: clamp(1rem, 2.5vw, 1.3rem);
-    color: var(--muted);
-    margin-bottom: 2rem;
-    animation: fadeUp 0.6s 0.2s ease both;
-  }
-  .hero-role em { color: var(--accent2); font-style: normal; }
+.hero-bio {
+  font-size: 1.05rem;
+  color: var(--text2);
+  max-width: 520px; margin: 0 auto 1.5rem;
+  line-height: 1.8;
+  min-height: 2rem;
+}
 
-  .hero-desc {
-    max-width: 500px;
-    color: var(--muted);
-    margin-bottom: 3rem;
-    line-height: 1.9;
-    animation: fadeUp 0.6s 0.3s ease both;
-  }
+/* Stats bar from GitHub */
+.github-stats {
+  display: inline-flex; gap: 0; margin-bottom: 2rem;
+  border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(59,130,246,0.2);
+  background: rgba(255,255,255,0.7);
+}
+.gh-stat {
+  padding: 10px 20px;
+  text-align: center;
+  border-right: 1px solid rgba(59,130,246,0.15);
+}
+.gh-stat:last-child { border-right: none; }
+.gh-stat-num {
+  font-size: 1.3rem; font-weight: 700;
+  color: var(--blue-dark); display: block;
+}
+.gh-stat-label { font-size: 11px; color: var(--muted); font-weight: 500; }
 
-  .hero-btns {
-    display: flex; gap: 1rem; flex-wrap: wrap;
-    animation: fadeUp 0.6s 0.4s ease both;
-  }
-  .btn {
-    padding: 12px 28px;
-    border-radius: 6px;
-    font-family: var(--mono);
-    font-size: 13px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.2s;
-    letter-spacing: 0.04em;
-  }
-  .btn-primary {
-    background: var(--accent);
-    color: #0a0a0f;
-    font-weight: 700;
-    border: none;
-  }
-  .btn-primary:hover { background: #a7f3d0; transform: translateY(-2px); }
-  .btn-outline {
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
-  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.hero-btns {
+  display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;
+}
+.btn {
+  padding: 11px 24px; border-radius: 10px;
+  font-family: var(--sans); font-size: 14px; font-weight: 600;
+  cursor: pointer; text-decoration: none;
+  transition: all 0.2s; border: none;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--blue-mid), var(--teal));
+  color: white;
+  box-shadow: 0 4px 14px rgba(37,99,235,0.35);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.45); }
+.btn-ghost {
+  background: rgba(255,255,255,0.8);
+  color: var(--text2);
+  border: 1px solid rgba(59,130,246,0.25);
+}
+.btn-ghost:hover { background: var(--blue-light); color: var(--blue-dark); transform: translateY(-2px); }
 
-  .hero-scroll {
-    position: absolute; bottom: 2rem; left: 3rem;
-    display: flex; align-items: center; gap: 10px;
-    color: var(--muted); font-size: 11px;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    animation: fadeUp 0.6s 0.6s ease both;
-  }
-  .scroll-line {
-    width: 40px; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent));
-    animation: scrollLine 2s ease infinite;
-  }
-  @keyframes scrollLine {
-    0% { transform: scaleX(0); transform-origin: left; }
-    50% { transform: scaleX(1); transform-origin: left; }
-    51% { transform: scaleX(1); transform-origin: right; }
-    100% { transform: scaleX(0); transform-origin: right; }
-  }
+/* SECTIONS */
+section:not(#hero) { padding: 5rem 2rem; }
+.container { max-width: 900px; margin: 0 auto; }
+.section-label {
+  font-family: var(--mono); font-size: 12px;
+  color: var(--blue); letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 0.5rem;
+}
+.section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 800; letter-spacing: -0.02em;
+  margin-bottom: 0.5rem; color: var(--text);
+}
+.section-line {
+  width: 40px; height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--teal));
+  border-radius: 3px; margin-bottom: 3rem;
+}
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+/* ABOUT */
+#about { background: transparent; }
+.about-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(59,130,246,0.08);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+}
+.about-text p { color: var(--text2); line-height: 1.9; margin-bottom: 1rem; font-size: 0.95rem; }
+.about-text p strong { color: var(--blue-dark); }
+.info-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.info-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  background: var(--blue-light);
+  border-radius: 10px;
+  font-size: 13px; color: var(--text2); font-weight: 500;
+}
+.info-item .icon { font-size: 16px; flex-shrink: 0; }
+.info-item a { color: var(--blue-mid); text-decoration: none; }
+.info-item a:hover { text-decoration: underline; }
 
-  /* --- SECTIONS --- */
-  section { padding: 6rem 3rem; }
-  .section-label {
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1rem;
-  }
-  .section-title {
-    font-family: var(--display);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-bottom: 1rem;
-  }
-  .section-divider {
-    width: 60px; height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    margin-bottom: 3rem;
-    border-radius: 2px;
-  }
+/* REPOS */
+#repos { background: transparent; }
+.repos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+.repo-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  transition: all 0.25s;
+  text-decoration: none; color: inherit;
+  display: flex; flex-direction: column;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 12px rgba(59,130,246,0.06);
+  position: relative; overflow: hidden;
+}
+.repo-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--teal));
+  transform: scaleX(0); transition: transform 0.3s;
+  transform-origin: left;
+}
+.repo-card:hover::before { transform: scaleX(1); }
+.repo-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(59,130,246,0.15); border-color: rgba(59,130,246,0.4); }
+.repo-name {
+  font-family: var(--mono); font-size: 14px; font-weight: 500;
+  color: var(--blue-mid); margin-bottom: 6px;
+  display: flex; align-items: center; gap: 6px;
+}
+.repo-name svg { width: 14px; height: 14px; flex-shrink: 0; }
+.repo-desc {
+  font-size: 13px; color: var(--muted); line-height: 1.6;
+  flex: 1; margin-bottom: 1rem;
+  min-height: 36px;
+}
+.repo-meta { display: flex; gap: 12px; align-items: center; }
+.repo-lang {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 12px; color: var(--muted);
+}
+.lang-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.repo-stars { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--muted); }
 
-  /* --- ABOUT --- */
-  #about { background: var(--bg2); }
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-  .about-text p { color: var(--muted); line-height: 1.9; margin-bottom: 1.2rem; }
-  .about-text p strong { color: var(--text); }
-  .about-stats {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-  }
-  .stat-card {
-    padding: 1.5rem;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--bg3);
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .stat-card:hover { border-color: rgba(110,231,183,0.4); transform: translateY(-4px); }
-  .stat-num {
-    font-family: var(--display);
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--accent);
-    line-height: 1;
-    margin-bottom: 0.3rem;
-  }
-  .stat-label { font-size: 12px; color: var(--muted); }
+/* SKILLS */
+#skills { background: transparent; }
+.skills-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.skill-pill {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 16px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  font-size: 13px; font-weight: 600; color: var(--text2);
+  backdrop-filter: blur(10px);
+  transition: all 0.2s;
+}
+.skill-pill:hover { background: var(--blue-light); border-color: rgba(59,130,246,0.4); color: var(--blue-dark); transform: translateY(-2px); }
+.skill-section { margin-bottom: 2rem; }
+.skill-section-title { font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; }
 
-  /* --- SKILLS --- */
-  #skills { background: var(--bg); }
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-  .skill-group {
-    padding: 1.5rem;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--bg2);
-    transition: border-color 0.2s;
-  }
-  .skill-group:hover { border-color: rgba(129,140,248,0.4); }
-  .skill-group-title {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .skill-group-title span {
-    font-size: 18px;
-  }
-  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-  .skill-tag {
-    padding: 4px 12px;
-    border-radius: 100px;
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    transition: all 0.2s;
-  }
-  .skill-tag:hover { border-color: var(--accent); color: var(--accent); }
-  .skill-tag.hot { border-color: rgba(110,231,183,0.3); color: var(--accent); }
+/* CONTACT */
+#contact { background: transparent; text-align: center; }
+.contact-card {
+  background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(14,165,233,0.08));
+  border: 1px solid rgba(59,130,246,0.25);
+  border-radius: 24px;
+  padding: 3.5rem 2rem;
+  backdrop-filter: blur(10px);
+  max-width: 600px; margin: 0 auto;
+}
+.contact-card h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800; letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; margin-bottom: 1rem;
+}
+.contact-card p { color: var(--text2); margin-bottom: 2rem; line-height: 1.8; }
+.contact-email {
+  display: inline-block;
+  font-family: var(--mono); font-size: 1.1rem; color: var(--blue-mid);
+  text-decoration: none; margin-bottom: 2rem;
+  padding: 10px 24px;
+  background: rgba(59,130,246,0.08);
+  border-radius: 10px;
+  border: 1px solid rgba(59,130,246,0.2);
+  transition: all 0.2s;
+}
+.contact-email:hover { background: var(--blue-light); border-color: var(--blue); }
+.social-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.social-link {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 20px;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(59,130,246,0.2);
+  border-radius: 10px;
+  text-decoration: none; color: var(--text2);
+  font-size: 13px; font-weight: 600;
+  transition: all 0.2s;
+}
+.social-link:hover { background: var(--blue-light); border-color: var(--blue); color: var(--blue-dark); transform: translateY(-2px); }
+.social-link svg { width: 18px; height: 18px; }
 
-  /* --- PROJECTS --- */
-  #projects { background: var(--bg2); }
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.5rem;
-  }
-  .project-card {
-    padding: 2rem;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    background: var(--bg3);
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-  .project-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    transform: scaleX(0);
-    transition: transform 0.3s;
-    transform-origin: left;
-  }
-  .project-card:hover::before { transform: scaleX(1); }
-  .project-card:hover { border-color: rgba(110,231,183,0.25); transform: translateY(-6px); }
+/* FOOTER */
+footer {
+  padding: 1.5rem 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(59,130,246,0.15);
+  background: rgba(255,255,255,0.5);
+  color: var(--muted); font-size: 13px;
+}
+footer a { color: var(--blue); text-decoration: none; }
 
-  .project-icon {
-    font-size: 2rem; margin-bottom: 1rem;
-  }
-  .project-title {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-  }
-  .project-desc { color: var(--muted); font-size: 13px; line-height: 1.7; margin-bottom: 1.2rem; }
-  .project-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.5rem; }
-  .project-stack span {
-    padding: 3px 10px;
-    border-radius: 4px;
-    background: rgba(110,231,183,0.08);
-    color: var(--accent);
-    font-size: 11px;
-  }
-  .project-links { display: flex; gap: 1rem; }
-  .project-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 12px;
-    display: flex; align-items: center; gap: 5px;
-    transition: color 0.2s;
-  }
-  .project-links a:hover { color: var(--accent); }
-  .project-links a::before { content: '→'; font-size: 14px; }
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* --- CONTACT --- */
-  #contact { background: var(--bg); text-align: center; }
-  .contact-inner { max-width: 600px; margin: 0 auto; }
-  .contact-heading {
-    font-family: var(--display);
-    font-size: clamp(2rem, 5vw, 4rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    margin-bottom: 1rem;
-  }
-  .contact-heading span { color: var(--accent); }
-  .contact-sub { color: var(--muted); margin-bottom: 3rem; line-height: 1.9; }
-  .contact-email {
-    display: inline-block;
-    font-size: clamp(1rem, 2.5vw, 1.4rem);
-    color: var(--accent);
-    text-decoration: none;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 4px;
-    margin-bottom: 3rem;
-    transition: border-color 0.2s;
-  }
-  .contact-email:hover { border-color: var(--accent); }
-  .contact-socials { display: flex; justify-content: center; gap: 1.5rem; }
-  .social-link {
-    display: flex; align-items: center; gap: 6px;
-    padding: 10px 20px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 12px;
-    transition: all 0.2s;
-  }
-  .social-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+/* LOADING */
+.loading { opacity: 0.4; font-size: 13px; color: var(--muted); font-style: italic; }
 
-  /* --- FOOTER --- */
-  footer {
-    padding: 2rem 3rem;
-    border-top: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: center;
-    background: var(--bg);
-    color: var(--muted); font-size: 12px;
-  }
-  footer a { color: var(--accent); text-decoration: none; }
-
-  /* --- SCROLL REVEAL --- */
-  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* --- RESPONSIVE --- */
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { gap: 1rem; }
-    #hero { padding: 7rem 1.5rem 4rem; }
-    section { padding: 4rem 1.5rem; }
-    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
-    .hero-scroll { left: 1.5rem; }
-  }
-
-  /* --- CURSOR --- */
-  .cursor {
-    display: inline-block;
-    width: 3px; height: 1.1em;
-    background: var(--accent);
-    margin-left: 4px;
-    vertical-align: middle;
-    animation: blink 1s step-end infinite;
-  }
-  @keyframes blink { 50% { opacity: 0; } }
+/* RESPONSIVE */
+@media (max-width: 700px) {
+  nav { padding: 0 1rem; }
+  .nav-links { display: none; }
+  .about-card { grid-template-columns: 1fr; gap: 2rem; }
+  .github-stats { flex-wrap: wrap; }
+  section:not(#hero) { padding: 3.5rem 1rem; }
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-logo">trg.id.vn</div>
+  <div class="nav-logo">Giangvp689</div>
   <ul class="nav-links">
     <li><a href="#about">Về tôi</a></li>
+    <li><a href="#repos">Dự án</a></li>
     <li><a href="#skills">Kỹ năng</a></li>
-    <li><a href="#projects">Dự án</a></li>
     <li><a href="#contact">Liên hệ</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-content">
-    <div class="hero-tag">Sẵn sàng nhận dự án mới</div>
-    <h1 class="hero-name">Trần Trường<br><span>Giang</span></h1>
-    <p class="hero-role">Full-Stack <em>Developer</em> &amp; Problem Solver<span class="cursor"></span></p>
-    <p class="hero-desc">
-      Tôi xây dựng những sản phẩm web hiện đại, tối ưu hiệu suất và dễ bảo trì.
-      Đam mê với clean code, UX tốt và kiến trúc hệ thống bền vững.
-    </p>
-    <div class="hero-btns">
-      <a href="#projects" class="btn btn-primary">Xem dự án</a>
-      <a href="#contact" class="btn btn-outline">Liên hệ tôi</a>
+  <div class="hero-inner">
+    <div class="avatar-wrap">
+      <div class="avatar-ring"></div>
+      <div class="avatar-inner" id="avatar">
+        <span>TG</span>
+      </div>
     </div>
-  </div>
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    Scroll
+
+    <div class="hero-badge">👨‍💻 Developer · Việt Nam</div>
+
+    <h1 class="hero-name" id="hero-name">Trần Trường Giang</h1>
+
+    <div class="hero-username">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      <a href="https://github.com/Giangvp689" target="_blank">@Giangvp689</a>
+    </div>
+
+    <p class="hero-bio" id="hero-bio">Full-Stack Developer · Yêu thích công nghệ và xây dựng sản phẩm thực tế</p>
+
+    <div class="github-stats" id="gh-stats">
+      <div class="gh-stat">
+        <span class="gh-stat-num" id="stat-repos">—</span>
+        <span class="gh-stat-label">Repos</span>
+      </div>
+      <div class="gh-stat">
+        <span class="gh-stat-num" id="stat-followers">—</span>
+        <span class="gh-stat-label">Followers</span>
+      </div>
+      <div class="gh-stat">
+        <span class="gh-stat-num" id="stat-following">—</span>
+        <span class="gh-stat-label">Following</span>
+      </div>
+    </div>
+
+    <div class="hero-btns">
+      <a href="https://github.com/Giangvp689" target="_blank" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub Profile
+      </a>
+      <a href="#contact" class="btn btn-ghost">Liên hệ tôi →</a>
+    </div>
   </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="reveal">
-    <p class="section-label">// 01. Giới thiệu</p>
+  <div class="container reveal">
+    <p class="section-label">// 01 · About</p>
     <h2 class="section-title">Về tôi</h2>
-    <div class="section-divider"></div>
-  </div>
-  <div class="about-grid reveal">
-    <div class="about-text">
-      <p>Xin chào! Tôi là <strong>Trần Trường Giang</strong>, một developer với niềm đam mê xây dựng những ứng dụng web chất lượng cao.</p>
-      <p>Tôi chú trọng vào <strong>code sạch</strong>, <strong>hiệu suất</strong> và trải nghiệm người dùng. Với tôi, lập trình không chỉ là viết code mà là giải quyết vấn đề một cách thanh lịch nhất.</p>
-      <p>Khi không code, tôi thích học các công nghệ mới, đọc tech blog và đóng góp cho cộng đồng developer Việt Nam.</p>
-      <div style="margin-top: 2rem;">
-        <a href="mailto:giang@trg.id.vn" class="btn btn-outline" style="display:inline-block; font-size:12px;">📧 giang@trg.id.vn</a>
+    <div class="section-line"></div>
+    <div class="about-card">
+      <div class="about-text">
+        <p>Xin chào! Tôi là <strong>Trần Trường Giang</strong>, một developer đam mê xây dựng những sản phẩm web hiện đại và có giá trị thực tế.</p>
+        <p>Tôi thích học công nghệ mới, viết code sạch và giải quyết những bài toán thú vị. Mục tiêu của tôi là tạo ra những sản phẩm vừa đẹp vừa hiệu quả.</p>
+        <p id="about-extra" style="display:none"></p>
       </div>
+      <ul class="info-list" id="info-list">
+        <li class="info-item">
+          <span class="icon">📍</span>
+          <span id="info-location">Bắc Ninh, Việt Nam</span>
+        </li>
+        <li class="info-item">
+          <span class="icon">🐱</span>
+          <a href="https://github.com/Giangvp689" target="_blank">github.com/Giangvp689</a>
+        </li>
+        <li class="info-item">
+          <span class="icon">📧</span>
+          <a href="mailto:giangvp689@gmail.com">giangvp689@gmail.com</a>
+        </li>
+        <li class="info-item" id="info-blog-wrap" style="display:none">
+          <span class="icon">🌐</span>
+          <a href="https://trg.id.vn" target="_blank">trg.id.vn</a>
+        </li>
+        <li class="info-item">
+          <span class="icon">🌐</span>
+          <a href="https://trg.id.vn">trg.id.vn</a>
+        </li>
+        <li class="info-item" id="info-company-wrap" style="display:none">
+          <span class="icon">🏢</span>
+          <span id="info-company"></span>
+        </li>
+      </ul>
     </div>
-    <div class="about-stats">
-      <div class="stat-card">
-        <div class="stat-num">3+</div>
-        <div class="stat-label">Năm kinh nghiệm</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">20+</div>
-        <div class="stat-label">Dự án hoàn thành</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">10+</div>
-        <div class="stat-label">Công nghệ sử dụng</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">∞</div>
-        <div class="stat-label">Cà phê đã uống ☕</div>
-      </div>
+  </div>
+</section>
+
+<!-- REPOS -->
+<section id="repos">
+  <div class="container reveal">
+    <p class="section-label">// 02 · Projects</p>
+    <h2 class="section-title">Repositories</h2>
+    <div class="section-line"></div>
+    <div class="repos-grid" id="repos-grid">
+      <p class="loading">Đang tải repos từ GitHub...</p>
     </div>
   </div>
 </section>
 
 <!-- SKILLS -->
 <section id="skills">
-  <div class="reveal">
-    <p class="section-label">// 02. Kỹ năng</p>
+  <div class="container reveal">
+    <p class="section-label">// 03 · Skills</p>
     <h2 class="section-title">Tech Stack</h2>
-    <div class="section-divider"></div>
-  </div>
-  <div class="skills-grid reveal">
-    <div class="skill-group">
-      <div class="skill-group-title"><span>🖥️</span> Frontend</div>
-      <div class="skill-tags">
-        <span class="skill-tag hot">React</span>
-        <span class="skill-tag hot">TypeScript</span>
-        <span class="skill-tag">Next.js</span>
-        <span class="skill-tag">HTML/CSS</span>
-        <span class="skill-tag">Tailwind</span>
-        <span class="skill-tag">Vue.js</span>
+    <div class="section-line"></div>
+    <div id="skills-content">
+      <div class="skill-section">
+        <div class="skill-section-title">Phát hiện từ GitHub repos</div>
+        <div class="skills-row" id="skills-detected">
+          <p class="loading">Đang phân tích ngôn ngữ...</p>
+        </div>
       </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title"><span>⚙️</span> Backend</div>
-      <div class="skill-tags">
-        <span class="skill-tag hot">Node.js</span>
-        <span class="skill-tag hot">Express</span>
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">REST API</span>
-        <span class="skill-tag">GraphQL</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title"><span>🗄️</span> Database</div>
-      <div class="skill-tags">
-        <span class="skill-tag hot">PostgreSQL</span>
-        <span class="skill-tag">MySQL</span>
-        <span class="skill-tag">MongoDB</span>
-        <span class="skill-tag">Redis</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title"><span>🚀</span> DevOps & Tools</div>
-      <div class="skill-tags">
-        <span class="skill-tag hot">Git</span>
-        <span class="skill-tag">Docker</span>
-        <span class="skill-tag">Linux</span>
-        <span class="skill-tag">Nginx</span>
-        <span class="skill-tag">CI/CD</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="reveal">
-    <p class="section-label">// 03. Dự án</p>
-    <h2 class="section-title">Công việc nổi bật</h2>
-    <div class="section-divider"></div>
-  </div>
-  <div class="projects-grid reveal">
-    <div class="project-card">
-      <div class="project-icon">🛒</div>
-      <h3 class="project-title">E-Commerce Platform</h3>
-      <p class="project-desc">Nền tảng thương mại điện tử đầy đủ tính năng: giỏ hàng, thanh toán, quản lý đơn hàng và dashboard admin.</p>
-      <div class="project-stack">
-        <span>React</span><span>Node.js</span><span>PostgreSQL</span><span>Stripe</span>
-      </div>
-      <div class="project-links">
-        <a href="#">Demo</a>
-        <a href="#">GitHub</a>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-icon">📊</div>
-      <h3 class="project-title">Analytics Dashboard</h3>
-      <p class="project-desc">Dashboard phân tích dữ liệu real-time với biểu đồ tương tác và hệ thống báo cáo tự động.</p>
-      <div class="project-stack">
-        <span>Next.js</span><span>TypeScript</span><span>D3.js</span><span>Redis</span>
-      </div>
-      <div class="project-links">
-        <a href="#">Demo</a>
-        <a href="#">GitHub</a>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-icon">💬</div>
-      <h3 class="project-title">Chat App Realtime</h3>
-      <p class="project-desc">Ứng dụng nhắn tin thời gian thực hỗ trợ phòng chat nhóm, gửi file và thông báo đẩy.</p>
-      <div class="project-stack">
-        <span>Socket.io</span><span>Express</span><span>MongoDB</span><span>React</span>
-      </div>
-      <div class="project-links">
-        <a href="#">Demo</a>
-        <a href="#">GitHub</a>
+      <div class="skill-section" style="margin-top: 1.5rem;">
+        <div class="skill-section-title">Tools & Platform</div>
+        <div class="skills-row">
+          <span class="skill-pill">🐱 Git & GitHub</span>
+          <span class="skill-pill">🐳 Docker</span>
+          <span class="skill-pill">🐧 Linux</span>
+          <span class="skill-pill">⚡ VS Code</span>
+          <span class="skill-pill">🔄 CI/CD</span>
+          <span class="skill-pill">☁️ Cloud Deploy</span>
+        </div>
       </div>
     </div>
   </div>
@@ -585,59 +527,179 @@
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="contact-inner reveal">
-    <p class="section-label">// 04. Liên hệ</p>
-    <h2 class="contact-heading">Hãy cùng<br><span>làm việc!</span></h2>
-    <p class="contact-sub">
-      Bạn có dự án thú vị hay cơ hội hợp tác? Tôi luôn sẵn sàng lắng nghe.
-      Đừng ngần ngại liên hệ!
-    </p>
-    <a href="mailto:giang@trg.id.vn" class="contact-email">giang@trg.id.vn</a>
-    <div class="contact-socials">
-      <a href="https://github.com/" class="social-link" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-        GitHub
-      </a>
-      <a href="https://linkedin.com/" class="social-link" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        LinkedIn
-      </a>
-      <a href="https://facebook.com/" class="social-link" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        Facebook
-      </a>
+  <div class="container reveal">
+    <div class="contact-card">
+      <p class="section-label" style="text-align:center; margin-bottom:0.5rem;">// 04 · Contact</p>
+      <h2>Hãy kết nối!</h2>
+      <p>Bạn có ý tưởng thú vị hoặc cơ hội hợp tác? Tôi luôn sẵn sàng lắng nghe và trao đổi.</p>
+      <div>
+        <a href="mailto:giangvp689@gmail.com" class="contact-email">giangvp689@gmail.com</a>
+      </div>
+      <div class="social-links">
+        <a href="https://github.com/Giangvp689" target="_blank" class="social-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://trg.id.vn" class="social-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          trg.id.vn
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <span>© 2025 Trần Trường Giang</span>
-  <span>Built with ❤️ · <a href="https://trg.id.vn">trg.id.vn</a></span>
+  <p>© 2025 Trần Trường Giang · <a href="https://github.com/Giangvp689" target="_blank">@Giangvp689</a> · <a href="https://trg.id.vn">trg.id.vn</a></p>
 </footer>
 
 <script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
+const GH_USER = 'Giangvp689';
+const API = 'https://api.github.com';
 
-  // Nav active state
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 200) current = s.getAttribute('id');
+const langColors = {
+  JavaScript:'#f1e05a', TypeScript:'#3178c6', Python:'#3572A5',
+  HTML:'#e34c26', CSS:'#563d7c', Vue:'#41b883', React:'#61dafb',
+  Java:'#b07219', 'C#':'#178600', PHP:'#4F5D95', Go:'#00ADD8',
+  Rust:'#dea584', Ruby:'#701516', Kotlin:'#A97BFF', Swift:'#F05138',
+  Dart:'#00B4AB', Shell:'#89e051', Dockerfile:'#384d54',
+  'C++':'#f34b7d', C:'#555555', Scss:'#c6538c'
+};
+
+async function loadGitHub() {
+  try {
+    // Fetch user profile
+    const res = await fetch(`${API}/users/${GH_USER}`);
+    const user = await res.json();
+
+    // Avatar
+    if (user.avatar_url) {
+      const av = document.getElementById('avatar');
+      av.innerHTML = `<img src="${user.avatar_url}" alt="${user.name || GH_USER}">`;
+    }
+
+    // Name
+    if (user.name) document.getElementById('hero-name').textContent = user.name;
+
+    // Bio
+    if (user.bio) document.getElementById('hero-bio').textContent = user.bio;
+
+    // Stats
+    document.getElementById('stat-repos').textContent = user.public_repos || 0;
+    document.getElementById('stat-followers').textContent = user.followers || 0;
+    document.getElementById('stat-following').textContent = user.following || 0;
+
+    // Location
+    if (user.location) document.getElementById('info-location').textContent = user.location;
+
+    // Company
+    if (user.company) {
+      document.getElementById('info-company').textContent = user.company;
+      document.getElementById('info-company-wrap').style.display = 'flex';
+    }
+
+    // Blog
+    if (user.blog && user.blog !== 'https://trg.id.vn' && user.blog !== 'trg.id.vn') {
+      document.getElementById('info-blog-wrap').style.display = 'flex';
+      document.getElementById('info-blog-wrap').querySelector('a').href = user.blog;
+      document.getElementById('info-blog-wrap').querySelector('a').textContent = user.blog.replace(/^https?:\/\//, '');
+    }
+
+    // Update email
+    if (user.email) {
+      document.querySelector('.contact-email').href = 'mailto:' + user.email;
+      document.querySelector('.contact-email').textContent = user.email;
+    }
+
+    // Page title
+    if (user.name) document.title = `${user.name} — Developer`;
+
+  } catch(e) { console.log('Profile load error', e); }
+
+  // Fetch repos
+  try {
+    const res = await fetch(`${API}/users/${GH_USER}/repos?sort=updated&per_page=30`);
+    const repos = await res.json();
+
+    const grid = document.getElementById('repos-grid');
+    grid.innerHTML = '';
+
+    // Sort by stars + updated, take top 9
+    const sorted = repos
+      .filter(r => !r.fork)
+      .sort((a,b) => (b.stargazers_count - a.stargazers_count) || new Date(b.updated_at) - new Date(a.updated_at))
+      .slice(0, 9);
+
+    if (sorted.length === 0) {
+      grid.innerHTML = '<p style="color:var(--muted);font-size:14px;">Chưa có repo public nào.</p>';
+    } else {
+      sorted.forEach(repo => {
+        const color = langColors[repo.language] || '#94a3b8';
+        const desc = repo.description || 'Chưa có mô tả';
+        const card = document.createElement('a');
+        card.className = 'repo-card';
+        card.href = repo.html_url;
+        card.target = '_blank';
+        card.innerHTML = `
+          <div class="repo-name">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8z"/></svg>
+            ${repo.name}
+          </div>
+          <p class="repo-desc">${desc}</p>
+          <div class="repo-meta">
+            ${repo.language ? `<span class="repo-lang"><span class="lang-dot" style="background:${color}"></span>${repo.language}</span>` : ''}
+            <span class="repo-stars">⭐ ${repo.stargazers_count}</span>
+            ${repo.forks_count > 0 ? `<span class="repo-stars">🍴 ${repo.forks_count}</span>` : ''}
+          </div>`;
+        grid.appendChild(card);
+      });
+    }
+
+    // Auto-detect languages for skills
+    const langMap = {};
+    repos.forEach(r => {
+      if (r.language) langMap[r.language] = (langMap[r.language] || 0) + 1;
     });
-    navLinks.forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
-    });
+    const skillsEl = document.getElementById('skills-detected');
+    skillsEl.innerHTML = '';
+    const sorted2 = Object.entries(langMap).sort((a,b)=>b[1]-a[1]);
+    if (sorted2.length === 0) {
+      skillsEl.innerHTML = '<span class="skill-pill">Đang cập nhật...</span>';
+    } else {
+      sorted2.forEach(([lang, count]) => {
+        const color = langColors[lang] || '#94a3b8';
+        const pill = document.createElement('span');
+        pill.className = 'skill-pill';
+        pill.innerHTML = `<span style="width:10px;height:10px;background:${color};border-radius:50%;display:inline-block"></span> ${lang} <span style="font-size:11px;color:var(--muted);margin-left:2px">(${count})</span>`;
+        skillsEl.appendChild(pill);
+      });
+    }
+
+  } catch(e) {
+    document.getElementById('repos-grid').innerHTML = '<p style="color:var(--muted)">Không thể tải repos. Vui lòng thử lại.</p>';
+    console.log('Repos load error', e);
+  }
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Nav active
+const secs = document.querySelectorAll('section[id]');
+const navAs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if(window.scrollY >= s.offsetTop - 150) cur = s.id; });
+  navAs.forEach(a => {
+    a.style.background = a.getAttribute('href') === '#'+cur ? 'var(--blue-light)' : '';
+    a.style.color = a.getAttribute('href') === '#'+cur ? 'var(--blue-dark)' : '';
   });
+});
+
+loadGitHub();
 </script>
 </body>
 </html>
