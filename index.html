@@ -19,13 +19,17 @@
   box-sizing:border-box;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 :root{
 
-  --bg:#eef6ff;
+  --bg:#f4f8ff;
 
   --card:rgba(255,255,255,0.72);
 
-  --border:rgba(255,255,255,0.35);
+  --border:rgba(255,255,255,0.4);
 
   --blue:#2563eb;
   --sky:#0ea5e9;
@@ -40,22 +44,29 @@
 
 }
 
-html{
-  scroll-behavior:smooth;
-}
-
 body{
+
   font-family:'Outfit',sans-serif;
-  background:linear-gradient(180deg,#eef6ff 0%,#f8fbff 100%);
+
+  background:
+  linear-gradient(
+    180deg,
+    #eef6ff 0%,
+    #f8fbff 100%
+  );
+
   color:var(--text);
+
   overflow-x:hidden;
 }
 
-/* ===== BACKGROUND ===== */
+/* BACKGROUND */
 
 .bg-grid{
+
   position:fixed;
   inset:0;
+
   z-index:-2;
 
   background-image:
@@ -66,33 +77,47 @@ body{
 }
 
 .orb{
+
   position:fixed;
+
   border-radius:50%;
+
   filter:blur(90px);
+
   z-index:-1;
-  animation:float 14s ease-in-out infinite;
+
+  animation:float 15s ease-in-out infinite;
 }
 
 .orb1{
+
   width:420px;
   height:420px;
-  background:rgba(56,189,248,0.16);
-  top:-100px;
-  left:-100px;
+
+  background:rgba(56,189,248,0.18);
+
+  top:-120px;
+  left:-120px;
 }
 
 .orb2{
+
   width:340px;
   height:340px;
-  background:rgba(99,102,241,0.14);
+
+  background:rgba(99,102,241,0.16);
+
   right:-100px;
-  top:18%;
+  top:20%;
 }
 
 .orb3{
-  width:300px;
-  height:300px;
-  background:rgba(37,99,235,0.14);
+
+  width:320px;
+  height:320px;
+
+  background:rgba(37,99,235,0.15);
+
   bottom:-120px;
   left:30%;
 }
@@ -100,44 +125,54 @@ body{
 @keyframes float{
 
   0%,100%{
-    transform:translateY(0px);
+    transform:translateY(0);
   }
 
   50%{
-    transform:translateY(-30px);
+    transform:translateY(-28px);
   }
 
 }
 
-/* ===== NAV ===== */
+/* NAVBAR */
 
 nav{
 
   position:fixed;
+
   top:0;
+  left:0;
+
   width:100%;
-  height:76px;
+  height:78px;
 
   display:flex;
   align-items:center;
   justify-content:space-between;
 
-  padding:0 40px;
+  padding:0 42px;
 
-  background:rgba(255,255,255,0.65);
-  backdrop-filter:blur(20px);
+  background:rgba(255,255,255,0.7);
 
-  border-bottom:1px solid rgba(255,255,255,0.5);
+  backdrop-filter:blur(18px);
+
+  border-bottom:1px solid rgba(255,255,255,0.55);
 
   z-index:999;
 }
 
 .logo{
 
-  font-size:22px;
+  font-size:24px;
   font-weight:900;
 
-  background:linear-gradient(135deg,var(--blue),var(--sky));
+  background:
+  linear-gradient(
+    135deg,
+    var(--blue),
+    var(--sky)
+  );
+
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
@@ -152,30 +187,41 @@ nav{
 .nav-links a{
 
   text-decoration:none;
+
   color:var(--muted);
 
   padding:12px 18px;
+
   border-radius:16px;
 
   transition:0.3s;
-  font-weight:600;
+
+  font-weight:700;
 }
 
 .nav-links a:hover{
 
   background:white;
+
   color:var(--blue);
 }
 
 .nav-btn{
 
-  background:linear-gradient(135deg,var(--blue),var(--sky));
+  background:
+  linear-gradient(
+    135deg,
+    var(--blue),
+    var(--sky)
+  );
+
   color:white !important;
 
-  box-shadow:0 10px 24px rgba(37,99,235,0.22);
+  box-shadow:
+  0 10px 24px rgba(37,99,235,0.24);
 }
 
-/* ===== HERO ===== */
+/* HERO */
 
 .hero{
 
@@ -190,13 +236,15 @@ nav{
 
 .hero-inner{
 
-  max-width:1280px;
   width:100%;
+  max-width:1320px;
 
   display:grid;
+
   grid-template-columns:1.1fr 430px;
 
   gap:60px;
+
   align-items:center;
 }
 
@@ -210,28 +258,35 @@ nav{
 
   border-radius:999px;
 
-  background:rgba(255,255,255,0.7);
+  background:rgba(255,255,255,0.75);
 
   border:1px solid rgba(37,99,235,0.12);
-
-  margin-bottom:28px;
 
   color:var(--blue);
 
   font-size:14px;
-  font-weight:700;
+  font-weight:800;
+
+  margin-bottom:28px;
 }
 
 .hero h1{
 
-  font-size:84px;
-  line-height:0.95;
+  font-size:88px;
+
+  line-height:0.92;
 
   font-weight:900;
 
   margin-bottom:24px;
 
-  background:linear-gradient(135deg,#1e3a8a,#2563eb,#0ea5e9);
+  background:
+  linear-gradient(
+    135deg,
+    #1e3a8a,
+    #2563eb,
+    #0ea5e9
+  );
 
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -240,11 +295,12 @@ nav{
 .hero-role{
 
   font-size:28px;
+
   font-weight:700;
 
   color:#334155;
 
-  margin-bottom:24px;
+  margin-bottom:28px;
 }
 
 .hero-role span{
@@ -253,12 +309,13 @@ nav{
 
 .hero-desc{
 
-  max-width:760px;
-
   font-size:18px;
+
   line-height:1.95;
 
   color:var(--muted);
+
+  max-width:760px;
 
   margin-bottom:40px;
 }
@@ -283,6 +340,7 @@ nav{
   border-radius:18px;
 
   text-decoration:none;
+
   font-weight:700;
 
   transition:0.3s;
@@ -290,43 +348,50 @@ nav{
 
 .btn-primary{
 
-  background:linear-gradient(135deg,var(--blue),var(--sky));
+  background:
+  linear-gradient(
+    135deg,
+    var(--blue),
+    var(--sky)
+  );
 
   color:white;
 
   box-shadow:
-  0 14px 32px rgba(37,99,235,0.25);
+  0 14px 32px rgba(37,99,235,0.24);
 }
 
 .btn-primary:hover{
-  transform:translateY(-4px);
+  transform:translateY(-5px);
 }
 
 .btn-white{
 
   background:white;
+
   color:var(--text);
 
   border:1px solid rgba(37,99,235,0.08);
 }
 
 .btn-white:hover{
-  transform:translateY(-4px);
+  transform:translateY(-5px);
 }
 
-/* ===== STATS ===== */
+/* STATS */
 
 .hero-stats{
 
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+
+  grid-template-columns:repeat(4,1fr);
 
   gap:18px;
 }
 
 .stat{
 
-  background:rgba(255,255,255,0.68);
+  background:rgba(255,255,255,0.72);
 
   border:1px solid var(--border);
 
@@ -334,7 +399,7 @@ nav{
 
   padding:24px;
 
-  border-radius:24px;
+  border-radius:26px;
 
   box-shadow:var(--shadow);
 }
@@ -342,24 +407,28 @@ nav{
 .stat h3{
 
   font-size:34px;
+
   color:var(--blue);
 
   margin-bottom:8px;
 }
 
 .stat p{
+
   color:var(--muted);
+
+  line-height:1.7;
 }
 
-/* ===== PROFILE ===== */
+/* PROFILE */
 
 .profile-card{
 
-  background:rgba(255,255,255,0.72);
+  background:rgba(255,255,255,0.75);
 
-  border:1px solid rgba(255,255,255,0.55);
+  border:1px solid rgba(255,255,255,0.6);
 
-  backdrop-filter:blur(20px);
+  backdrop-filter:blur(22px);
 
   border-radius:34px;
 
@@ -375,7 +444,12 @@ nav{
 
   border-radius:50%;
 
-  background:linear-gradient(135deg,var(--blue),var(--sky));
+  background:
+  linear-gradient(
+    135deg,
+    var(--blue),
+    var(--sky)
+  );
 
   padding:5px;
 
@@ -388,6 +462,7 @@ nav{
   height:100%;
 
   border-radius:50%;
+
   object-fit:cover;
 }
 
@@ -396,7 +471,8 @@ nav{
   text-align:center;
 
   font-size:30px;
-  font-weight:800;
+
+  font-weight:900;
 
   margin-bottom:8px;
 }
@@ -404,22 +480,23 @@ nav{
 .profile-role{
 
   text-align:center;
+
   color:var(--sky);
 
-  font-weight:600;
+  font-weight:700;
 
-  margin-bottom:26px;
+  margin-bottom:24px;
 }
 
 .profile-bio{
 
   text-align:center;
 
-  line-height:1.8;
+  line-height:1.9;
 
   color:var(--muted);
 
-  margin-bottom:28px;
+  margin-bottom:30px;
 }
 
 .info-box{
@@ -447,13 +524,20 @@ nav{
 }
 
 .info-item span{
+
   color:var(--muted);
+
   font-size:14px;
 }
 
 .cv-box{
 
-  background:linear-gradient(135deg,#2563eb,#0ea5e9);
+  background:
+  linear-gradient(
+    135deg,
+    #2563eb,
+    #0ea5e9
+  );
 
   color:white;
 
@@ -466,7 +550,7 @@ nav{
 
   font-size:22px;
 
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 
 .cv-box p{
@@ -474,8 +558,6 @@ nav{
   line-height:1.8;
 
   margin-bottom:20px;
-
-  opacity:0.95;
 }
 
 .cv-btn{
@@ -485,6 +567,7 @@ nav{
   gap:10px;
 
   background:white;
+
   color:var(--blue);
 
   text-decoration:none;
@@ -493,28 +576,36 @@ nav{
 
   border-radius:16px;
 
-  font-weight:700;
+  font-weight:800;
 }
 
-/* ===== SECTIONS ===== */
+/* SECTION */
 
 .section{
   padding:110px 24px;
 }
 
 .container{
-  max-width:1280px;
+
+  max-width:1320px;
+
   margin:auto;
 }
 
 .section-title{
 
-  font-size:54px;
+  font-size:56px;
+
   font-weight:900;
 
   margin-bottom:18px;
 
-  background:linear-gradient(135deg,var(--blue),var(--sky));
+  background:
+  linear-gradient(
+    135deg,
+    var(--blue),
+    var(--sky)
+  );
 
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -524,21 +615,23 @@ nav{
 
   color:var(--muted);
 
-  line-height:1.9;
+  line-height:1.95;
 
-  max-width:900px;
+  max-width:920px;
 
   margin-bottom:60px;
 }
 
-/* ===== CARDS ===== */
+/* CARDS */
 
 .cards{
 
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
 
-  gap:24px;
+  grid-template-columns:
+  repeat(auto-fit,minmax(320px,1fr));
+
+  gap:28px;
 }
 
 .card{
@@ -551,49 +644,126 @@ nav{
 
   border-radius:30px;
 
-  padding:32px;
+  padding:34px;
 
   transition:0.35s;
 
   box-shadow:var(--shadow);
+
+  position:relative;
+
+  overflow:hidden;
 }
 
 .card:hover{
   transform:translateY(-8px);
 }
 
+.card::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:4px;
+
+  background:
+  linear-gradient(
+    90deg,
+    var(--blue),
+    var(--sky)
+  );
+}
+
+.featured-card{
+
+  background:
+  linear-gradient(
+    135deg,
+    rgba(37,99,235,0.95),
+    rgba(14,165,233,0.9)
+  );
+
+  color:white;
+
+  border:none;
+}
+
+.featured-card p{
+  color:rgba(255,255,255,0.92);
+}
+
+.featured-card a{
+  color:white;
+}
+
+.featured-card .card-icon{
+
+  background:rgba(255,255,255,0.14);
+
+  color:white;
+}
+
+.featured-badge{
+
+  position:absolute;
+
+  top:18px;
+  right:18px;
+
+  background:white;
+
+  color:var(--blue);
+
+  padding:8px 14px;
+
+  border-radius:999px;
+
+  font-size:12px;
+  font-weight:900;
+}
+
 .card-icon{
 
-  width:70px;
-  height:70px;
+  width:74px;
+  height:74px;
 
-  border-radius:20px;
+  border-radius:22px;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  font-size:32px;
+  font-size:34px;
 
-  margin-bottom:24px;
+  margin-bottom:26px;
 
-  background:linear-gradient(135deg,#dbeafe,#e0f2fe);
+  background:
+  linear-gradient(
+    135deg,
+    #dbeafe,
+    #e0f2fe
+  );
 }
 
 .card h3{
 
-  font-size:24px;
+  font-size:26px;
 
-  margin-bottom:14px;
+  margin-bottom:16px;
 }
 
 .card p{
 
+  line-height:1.95;
+
   color:var(--muted);
 
-  line-height:1.9;
-
-  margin-bottom:22px;
+  margin-bottom:24px;
 }
 
 .card a{
@@ -602,10 +772,10 @@ nav{
 
   color:var(--blue);
 
-  font-weight:700;
+  font-weight:800;
 }
 
-/* ===== TIMELINE ===== */
+/* TIMELINE */
 
 .timeline{
 
@@ -616,11 +786,11 @@ nav{
 
 .timeline-item{
 
-  background:rgba(255,255,255,0.7);
+  background:rgba(255,255,255,0.72);
 
   border:1px solid var(--border);
 
-  padding:28px;
+  padding:30px;
 
   border-radius:28px;
 
@@ -640,22 +810,23 @@ nav{
 
 .timeline-item h3{
 
-  margin-bottom:12px;
+  margin-bottom:14px;
 }
 
 .timeline-item p{
 
-  line-height:1.9;
-
   color:var(--muted);
+
+  line-height:1.95;
 }
 
-/* ===== SKILLS ===== */
+/* SKILLS */
 
 .skills{
 
   display:flex;
   flex-wrap:wrap;
+
   gap:16px;
 }
 
@@ -672,12 +843,14 @@ nav{
   font-weight:700;
 }
 
-/* ===== CONTACT ===== */
+/* SOCIALS */
 
 .socials{
 
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(260px,1fr));
 
   gap:20px;
 }
@@ -707,40 +880,20 @@ nav{
   transform:translateY(-5px);
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 
 footer{
 
-  padding:60px 24px;
+  padding:70px 24px;
 
   text-align:center;
 
   color:var(--muted);
+
+  line-height:1.9;
 }
 
-/* ===== ANIM ===== */
-
-.hero-left,
-.profile-card{
-
-  animation:fadeUp 1s ease;
-}
-
-@keyframes fadeUp{
-
-  from{
-    opacity:0;
-    transform:translateY(40px);
-  }
-
-  to{
-    opacity:1;
-    transform:none;
-  }
-
-}
-
-/* ===== MOBILE ===== */
+/* MOBILE */
 
 @media(max-width:1100px){
 
@@ -749,7 +902,7 @@ footer{
   }
 
   .profile-card{
-    max-width:540px;
+    max-width:560px;
     margin:auto;
   }
 
@@ -766,7 +919,7 @@ footer{
   }
 
   .hero h1{
-    font-size:52px;
+    font-size:54px;
   }
 
   .hero-role{
@@ -774,7 +927,7 @@ footer{
   }
 
   .section-title{
-    font-size:38px;
+    font-size:40px;
   }
 
   .hero-stats{
@@ -805,19 +958,17 @@ footer{
   <div class="nav-links">
 
     <a href="#about">About</a>
-
-    <a href="#projects">Projects</a>
-
+    <a href="#projects">Works</a>
     <a href="#journey">Journey</a>
-
     <a href="#skills">Skills</a>
-
     <a href="#contact">Contact</a>
 
     <a href="./assets/CV.pdf"
        target="_blank"
        class="nav-btn">
+
        📄 Download CV
+
     </a>
 
   </div>
@@ -846,7 +997,7 @@ footer{
       <div class="hero-role">
 
         💻 Software Engineer ·
-        <span>AI & Machine Learning Enthusiast</span>
+        <span>AI & Fullstack Developer</span>
 
       </div>
 
@@ -854,28 +1005,45 @@ footer{
 
         Xin chào 👋 mình là Trường Giang,
         sinh viên Công nghệ thông tin đam mê xây dựng các hệ thống hiện đại,
-        web applications, AI applications và các sản phẩm có giá trị thực tế.
+        AI applications,
+        web platforms
+        và các sản phẩm công nghệ có giá trị thực tế.
 
         <br><br>
 
-        Hiện tại mình đang tập trung nghiên cứu và phát triển:
-        Fullstack Web Development, Cloud Computing,
-        Artificial Intelligence, Healthcare Technology
-        và các nền tảng hỗ trợ học tập cho sinh viên.
+        Hiện tại mình tập trung nghiên cứu:
+        Fullstack Web Development,
+        Artificial Intelligence,
+        Machine Learning,
+        Cloud Computing,
+        System Design
+        và GIS Applications.
 
         <br><br>
 
-        Mục tiêu của mình là trở thành Software Engineer có khả năng
-        xây dựng sản phẩm hoàn chỉnh từ UI/UX,
-        Backend, Database cho đến AI Integration.
+        Mục tiêu của mình là trở thành Software Engineer
+        có khả năng xây dựng sản phẩm hoàn chỉnh:
+        từ UI/UX,
+        Frontend,
+        Backend,
+        Database,
+        Infrastructure
+        cho đến AI Integration.
 
       </p>
 
       <div class="hero-buttons">
 
+        <a href="./study-sharing/index.html"
+           class="btn btn-primary">
+
+           📚 Study Sharing
+
+        </a>
+
         <a href="./assets/CV.pdf"
            target="_blank"
-           class="btn btn-primary">
+           class="btn btn-white">
 
            📄 View CV
 
@@ -889,33 +1057,26 @@ footer{
 
         </a>
 
-        <a href="#projects"
-           class="btn btn-white">
-
-           🚀 My Projects
-
-        </a>
-
       </div>
 
       <div class="hero-stats">
 
         <div class="stat">
 
-          <h3>3+</h3>
+          <h3>10+</h3>
 
           <p>
-            Main Technology Fields
+            Personal Projects
           </p>
 
         </div>
 
         <div class="stat">
 
-          <h3>10+</h3>
+          <h3>4+</h3>
 
           <p>
-            Personal Learning Projects
+            Technology Fields
           </p>
 
         </div>
@@ -926,6 +1087,16 @@ footer{
 
           <p>
             Passion For Technology
+          </p>
+
+        </div>
+
+        <div class="stat">
+
+          <h3>2026</h3>
+
+          <p>
+            Expanding Portfolio
           </p>
 
         </div>
@@ -954,9 +1125,11 @@ footer{
 
       <p class="profile-bio">
 
-        Passionate about technology,
-        modern web systems, AI applications,
-        cloud architecture và xây dựng các sản phẩm hữu ích cho cộng đồng.
+        Passionate about modern technologies,
+        scalable systems,
+        AI applications,
+        cloud infrastructure
+        và xây dựng các sản phẩm hữu ích cho cộng đồng.
 
       </p>
 
@@ -974,12 +1147,12 @@ footer{
 
         <div class="info-item">
           💼
-          <span>Freelance Developer & Personal Projects Builder</span>
+          <span>Freelance Developer & Project Builder</span>
         </div>
 
         <div class="info-item">
           🤖
-          <span>AI · Machine Learning · Fullstack Development</span>
+          <span>AI · ML · Fullstack · Cloud</span>
         </div>
 
         <div class="info-item">
@@ -1002,8 +1175,10 @@ footer{
 
         <p>
 
-          Xem chi tiết kinh nghiệm,
-          kỹ năng, công nghệ và các dự án mình đã thực hiện.
+          Xem toàn bộ kỹ năng,
+          công nghệ,
+          dự án
+          và định hướng phát triển nghề nghiệp của mình.
 
         </p>
 
@@ -1035,23 +1210,21 @@ footer{
 
     <p class="section-desc">
 
-      Mình là sinh viên Công nghệ thông tin với định hướng trở thành
-      Software Engineer chuyên về Web Systems và Artificial Intelligence.
-
-      <br><br>
-
       Mình yêu thích việc xây dựng các hệ thống hiện đại,
-      tối ưu trải nghiệm người dùng và giải quyết các bài toán thực tế bằng công nghệ.
+      trực quan,
+      tối ưu trải nghiệm người dùng
+      và giải quyết các bài toán thực tế bằng công nghệ.
 
       <br><br>
 
       Ngoài lập trình web,
       mình còn quan tâm đến:
-      Machine Learning, Deep Learning,
+      Machine Learning,
+      Deep Learning,
       Cloud Infrastructure,
-      Healthcare Technology,
-      GIS Applications
-      và System Design.
+      GIS Applications,
+      Healthcare Technology
+      và System Architecture.
 
     </p>
 
@@ -1067,9 +1240,9 @@ footer{
 
         <p>
 
-          Xây dựng giao diện hiện đại,
+          Xây dựng website hiện đại,
           responsive UI,
-          animation đẹp,
+          frontend animation,
           backend systems,
           API integration
           và trải nghiệm người dùng chuyên nghiệp.
@@ -1108,10 +1281,30 @@ footer{
 
         <p>
 
-          Tìm hiểu kiến trúc hệ thống,
-          scalable infrastructure,
-          deployment hiện đại
-          và cloud computing platforms.
+          Tìm hiểu scalable systems,
+          deployment hiện đại,
+          cloud computing,
+          infrastructure
+          và system architecture.
+
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-icon">
+          🗺️
+        </div>
+
+        <h3>GIS Applications</h3>
+
+        <p>
+
+          Phát triển hệ thống GIS,
+          WebGIS,
+          trực quan hóa dữ liệu không gian
+          và ứng dụng GIS trong quản lý hạ tầng.
 
         </p>
 
@@ -1135,13 +1328,17 @@ footer{
 
     <p class="section-desc">
 
-      Một vài dự án và hướng nghiên cứu nổi bật mình đang phát triển.
+      Một vài dự án nổi bật và nền tảng mình đang phát triển.
 
     </p>
 
     <div class="cards">
 
-      <div class="card">
+      <div class="card featured-card">
+
+        <div class="featured-badge">
+          MAIN PROJECT
+        </div>
 
         <div class="card-icon">
           📚
@@ -1151,16 +1348,44 @@ footer{
 
         <p>
 
-          Hệ thống chia sẻ tài liệu học tập dành cho sinh viên,
-          hỗ trợ upload tài liệu,
+          Nền tảng chia sẻ tài liệu học tập dành cho sinh viên
+          với giao diện hiện đại,
+          upload tài liệu,
           phân loại môn học,
-          giao diện hiện đại
-          và trải nghiệm trực quan.
+          tìm kiếm nhanh
+          và hướng tới xây dựng cộng đồng học tập mở.
 
         </p>
 
-        <a href="./study-sharing/">
-          Open Project →
+        <a href="./study-sharing/index.html">
+
+          Open Platform →
+
+        </a>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-icon">
+          📄
+        </div>
+
+        <h3>Professional CV & Portfolio</h3>
+
+        <p>
+
+          Hồ sơ cá nhân thể hiện kỹ năng,
+          công nghệ,
+          định hướng nghề nghiệp
+          và các dự án mình đã thực hiện.
+
+        </p>
+
+        <a href="./assets/CV.pdf" target="_blank">
+
+          View CV →
+
         </a>
 
       </div>
@@ -1178,7 +1403,7 @@ footer{
           Các thử nghiệm AI và Deep Learning
           trong hỗ trợ chẩn đoán,
           computer vision
-          và healthcare technology applications.
+          và healthcare technology.
 
         </p>
 
@@ -1198,6 +1423,45 @@ footer{
           WebGIS
           và trực quan hóa dữ liệu không gian
           phục vụ quản lý hạ tầng và giao thông.
+
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-icon">
+          ⚡
+        </div>
+
+        <h3>Frontend UI Experiments</h3>
+
+        <p>
+
+          Thiết kế giao diện hiện đại,
+          glassmorphism,
+          animation,
+          responsive layouts
+          và user experience optimization.
+
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-icon">
+          🖥️
+        </div>
+
+        <h3>Backend API Systems</h3>
+
+        <p>
+
+          Xây dựng REST APIs,
+          authentication systems,
+          database integration
+          và scalable backend architecture.
 
         </p>
 
@@ -1234,14 +1498,14 @@ footer{
         </div>
 
         <h3>
-          Fullstack & Modern Web Development
+          Fullstack Web Development
         </h3>
 
         <p>
 
-          Tập trung phát triển các hệ thống web hiện đại,
-          responsive UI,
+          Tập trung xây dựng các hệ thống web hiện đại,
           frontend animation,
+          responsive UI,
           backend APIs
           và database systems.
 
@@ -1252,11 +1516,11 @@ footer{
       <div class="timeline-item">
 
         <div class="timeline-year">
-          🤖 AI Research & Machine Learning
+          🤖 AI & Machine Learning
         </div>
 
         <h3>
-          Artificial Intelligence Learning
+          Artificial Intelligence Research
         </h3>
 
         <p>
@@ -1264,8 +1528,7 @@ footer{
           Nghiên cứu Machine Learning,
           Deep Learning,
           Computer Vision
-          và xây dựng các AI Applications
-          phục vụ các bài toán thực tế.
+          và các AI Applications phục vụ thực tế.
 
         </p>
 
@@ -1274,19 +1537,40 @@ footer{
       <div class="timeline-item">
 
         <div class="timeline-year">
-          🗺️ GIS & Spatial Technology
+          🗺️ GIS Technology
         </div>
 
         <h3>
-          GIS Applications Development
+          GIS & Spatial Systems
         </h3>
 
         <p>
 
-          Tìm hiểu hệ thống thông tin địa lý,
-          trực quan hóa dữ liệu không gian,
-          WebGIS
+          Tìm hiểu GIS,
+          WebGIS,
+          spatial data visualization
           và ứng dụng GIS trong quản lý hạ tầng.
+
+        </p>
+
+      </div>
+
+      <div class="timeline-item">
+
+        <div class="timeline-year">
+          ☁️ Cloud & Infrastructure
+        </div>
+
+        <h3>
+          System Architecture Learning
+        </h3>
+
+        <p>
+
+          Nghiên cứu deployment,
+          Linux systems,
+          cloud computing
+          và scalable infrastructure architecture.
 
         </p>
 
@@ -1322,16 +1606,22 @@ footer{
       <div class="skill">React</div>
       <div class="skill">Node.js</div>
       <div class="skill">Python</div>
+      <div class="skill">TensorFlow</div>
       <div class="skill">Machine Learning</div>
       <div class="skill">Deep Learning</div>
-      <div class="skill">TensorFlow</div>
+      <div class="skill">Computer Vision</div>
+      <div class="skill">Linux</div>
       <div class="skill">Git & GitHub</div>
       <div class="skill">Cloud Computing</div>
-      <div class="skill">Linux</div>
+      <div class="skill">REST API</div>
+      <div class="skill">MongoDB</div>
+      <div class="skill">MySQL</div>
       <div class="skill">GIS</div>
       <div class="skill">QGIS</div>
-      <div class="skill">Database Systems</div>
-      <div class="skill">REST API</div>
+      <div class="skill">WebGIS</div>
+      <div class="skill">System Design</div>
+      <div class="skill">Responsive UI</div>
+      <div class="skill">Frontend Animation</div>
 
     </div>
 
@@ -1380,7 +1670,7 @@ footer{
 
       </a>
 
-      <a href="https://linkedin.com/in/giang-tr%E1%BA%A7n-b641622b9"
+      <a href="https://linkedin.com"
          target="_blank"
          class="social">
 
@@ -1395,6 +1685,13 @@ footer{
 
       </a>
 
+      <a href="./study-sharing/index.html"
+         class="social">
+
+         📚 Study Sharing
+
+      </a>
+
     </div>
 
   </div>
@@ -1404,6 +1701,10 @@ footer{
 <footer>
 
   © 2026 Trần Trường Giang · trg.id.vn
+
+  <br><br>
+
+  Designed & Developed with passion for technology 🚀
 
 </footer>
 
