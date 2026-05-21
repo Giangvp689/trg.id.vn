@@ -1,0 +1,797 @@
+<!-- =========================
+TRG.ID.VN - STUDY PORTAL
+Version nâng cấp động + quản lý môn học + link tài liệu
+========================= -->
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TRG.ID.VN — Study Portal</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+  --bg:#07111f;
+  --card:rgba(255,255,255,0.08);
+  --border:rgba(255,255,255,0.12);
+  --text:#ecf3ff;
+  --muted:#9fb0cf;
+  --blue:#4da3ff;
+  --cyan:#6ee7ff;
+  --purple:#7c6dff;
+}
+
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  min-height:100vh;
+  position:relative;
+}
+
+/* BACKGROUND ANIMATION */
+
+.bg-animation{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  z-index:-2;
+}
+
+.blob{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(80px);
+  opacity:0.45;
+  animation:float 12s infinite ease-in-out;
+}
+
+.blob1{
+  width:400px;
+  height:400px;
+  background:#2563eb;
+  top:-100px;
+  left:-100px;
+}
+
+.blob2{
+  width:300px;
+  height:300px;
+  background:#7c3aed;
+  right:-80px;
+  top:30%;
+  animation-delay:2s;
+}
+
+.blob3{
+  width:350px;
+  height:350px;
+  background:#06b6d4;
+  bottom:-120px;
+  left:30%;
+  animation-delay:4s;
+}
+
+@keyframes float{
+  0%,100%{
+    transform:translateY(0px) translateX(0px);
+  }
+  50%{
+    transform:translateY(-40px) translateX(20px);
+  }
+}
+
+.grid-bg{
+  position:fixed;
+  inset:0;
+  background-image:
+  linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size:40px 40px;
+  z-index:-1;
+}
+
+/* NAV */
+
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 40px;
+  background:rgba(5,10,20,0.5);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  z-index:999;
+}
+
+.logo{
+  font-size:1.1rem;
+  font-weight:800;
+  letter-spacing:1px;
+  background:linear-gradient(90deg,#fff,#6ee7ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.nav-links{
+  display:flex;
+  gap:10px;
+}
+
+.nav-links a{
+  color:#dbeafe;
+  text-decoration:none;
+  padding:10px 18px;
+  border-radius:12px;
+  transition:0.3s;
+  font-size:14px;
+}
+
+.nav-links a:hover{
+  background:rgba(255,255,255,0.08);
+}
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:120px 20px 60px;
+  position:relative;
+}
+
+.hero-inner{
+  max-width:900px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 18px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+  margin-bottom:25px;
+  animation:fadeUp 1s ease;
+}
+
+.hero h1{
+  font-size:clamp(3rem,7vw,6rem);
+  line-height:1;
+  margin-bottom:20px;
+  font-weight:800;
+  background:linear-gradient(135deg,#fff,#6ee7ff,#4da3ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:fadeUp 1s ease;
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:1.15rem;
+  line-height:1.8;
+  max-width:700px;
+  margin:auto;
+  animation:fadeUp 1.3s ease;
+}
+
+.hero-buttons{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-top:35px;
+}
+
+.btn{
+  padding:14px 26px;
+  border-radius:14px;
+  text-decoration:none;
+  font-weight:700;
+  transition:0.3s;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,#2563eb,#06b6d4);
+  color:white;
+  box-shadow:0 10px 30px rgba(37,99,235,0.4);
+}
+
+.btn-primary:hover{
+  transform:translateY(-5px);
+}
+
+.btn-ghost{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.1);
+  color:white;
+}
+
+.btn-ghost:hover{
+  background:rgba(255,255,255,0.12);
+}
+
+/* SECTION */
+
+.section{
+  padding:100px 20px;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+}
+
+.section-title{
+  font-size:2.4rem;
+  margin-bottom:15px;
+  font-weight:800;
+}
+
+.section-desc{
+  color:var(--muted);
+  margin-bottom:50px;
+}
+
+/* SUBJECT GRID */
+
+.subject-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:25px;
+}
+
+.subject-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:24px;
+  padding:28px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+  backdrop-filter:blur(16px);
+  transition:0.4s;
+}
+
+.subject-card::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.08),transparent);
+  opacity:0;
+  transition:0.4s;
+}
+
+.subject-card:hover::before{
+  opacity:1;
+}
+
+.subject-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(110,231,255,0.3);
+  box-shadow:0 20px 50px rgba(0,0,0,0.3);
+}
+
+.subject-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:20px;
+}
+
+.subject-icon{
+  width:60px;
+  height:60px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#2563eb,#06b6d4);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.5rem;
+  box-shadow:0 10px 30px rgba(37,99,235,0.4);
+}
+
+.subject-status{
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(34,197,94,0.15);
+  color:#86efac;
+  font-size:12px;
+  font-weight:700;
+}
+
+.subject-name{
+  font-size:1.4rem;
+  font-weight:800;
+  margin-bottom:10px;
+}
+
+.subject-desc{
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:20px;
+}
+
+/* LINKS */
+
+.link-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.study-link{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 18px;
+  border-radius:14px;
+  background:rgba(255,255,255,0.06);
+  text-decoration:none;
+  color:white;
+  transition:0.3s;
+  border:1px solid transparent;
+}
+
+.study-link:hover{
+  transform:translateX(6px);
+  border-color:rgba(110,231,255,0.3);
+  background:rgba(255,255,255,0.1);
+}
+
+.link-left{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+
+.link-title{
+  font-size:14px;
+  font-weight:700;
+}
+
+.link-url{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.link-arrow{
+  font-size:1.2rem;
+}
+
+/* ADMIN PANEL */
+
+.admin-panel{
+  margin-top:60px;
+  padding:30px;
+  border-radius:24px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+}
+
+.admin-panel h3{
+  margin-bottom:20px;
+  font-size:1.5rem;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+
+input, textarea{
+  width:100%;
+  padding:14px;
+  border:none;
+  outline:none;
+  border-radius:14px;
+  background:rgba(255,255,255,0.08);
+  color:white;
+  font-family:inherit;
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.save-btn{
+  margin-top:20px;
+  padding:14px 24px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(135deg,#2563eb,#06b6d4);
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.save-btn:hover{
+  transform:translateY(-3px);
+}
+
+/* FOOTER */
+
+footer{
+  padding:50px 20px;
+  text-align:center;
+  color:var(--muted);
+}
+
+/* ANIMATION */
+
+.fade-up{
+  animation:fadeUp 1s ease;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(40px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+  nav{
+    padding:0 20px;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  .hero{
+    padding-top:140px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg-animation">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+</div>
+
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav>
+
+  <a href="../index.html" class="back-home">
+    ← Trang chủ
+  </a>
+
+  <div class="logo">TRG.ID.VN</div>
+
+  <div class="nav-links">
+    <a href="#subjects">Môn học</a>
+    <a href="#admin">Quản lý</a>
+  </div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-inner">
+
+    <div class="badge">
+      🚀 STUDY PORTAL · TRẦN TRƯỜNG GIANG
+    </div>
+
+    <h1>Study Sharing System</h1>
+
+    <p>
+      Hệ thống chia sẻ tài liệu học tập cá nhân. 
+      Tất cả bạn bè muốn truy cập link học tập đều phải đi qua 
+      <strong>trg.id.vn</strong> trước.
+      <br><br>
+      Bạn có thể thêm môn học, tài liệu, hướng dẫn, GitHub, video, website...
+      và chỉnh sửa bất cứ lúc nào.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#subjects" class="btn btn-primary">Xem môn học</a>
+      <a href="#admin" class="btn btn-ghost">Quản lý dữ liệu</a>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- SUBJECTS -->
+
+<section class="section" id="subjects">
+
+  <div class="container">
+
+    <h2 class="section-title">📚 Môn học của tôi</h2>
+
+    <p class="section-desc">
+      Tất cả tài liệu học tập, hướng dẫn và link được quản lý tập trung.
+    </p>
+
+    <div class="subject-grid" id="subjectGrid"></div>
+
+  </div>
+
+</section>
+
+<!-- ADMIN -->
+
+<section class="section" id="admin">
+
+  <div class="container">
+
+    <div class="admin-panel">
+
+      <h3>⚙️ Thêm môn học mới</h3>
+
+      <div class="form-grid">
+
+        <input type="text" id="subjectName" placeholder="Tên môn học">
+        
+        <input type="text" id="subjectIcon" placeholder="Emoji icon VD: 🗺️">
+
+        <input type="text" id="subjectStatus" placeholder="Trạng thái VD: Đang học">
+
+      </div>
+
+      <br>
+
+      <textarea id="subjectDesc" placeholder="Mô tả môn học"></textarea>
+
+      <br><br>
+
+      <h3>🔗 Thêm link học tập</h3>
+
+      <div class="form-grid">
+
+        <input type="text" id="linkTitle" placeholder="Tên link">
+
+        <input type="text" id="linkUrl" placeholder="https://...">
+
+      </div>
+
+      <button class="save-btn" onclick="addSubject()">
+        + Thêm môn học
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+  © 2026 TRG.ID.VN · Powered by Trần Trường Giang
+</footer>
+
+<script>
+
+/* =========================
+DỮ LIỆU MÔN HỌC
+========================= */
+
+let subjects = JSON.parse(localStorage.getItem('subjects')) || [
+
+{
+  name:'Hệ thống thông tin địa lý GIS',
+  icon:'🗺️',
+  status:'Đang học',
+  desc:'Tài liệu GIS, bản đồ số, QGIS, ArcGIS và các bài thực hành.',
+  links:[
+    {
+      title:'Website GIS',
+      url:'https://gis.vn'
+    },
+    {
+      title:'Hướng dẫn QGIS',
+      url:'https://qgis.org'
+    }
+  ]
+},
+
+{
+  name:'Software Quality Assurance',
+  icon:'💻',
+  status:'Đang học',
+  desc:'Tài liệu kiểm thử phần mềm, SQA, review và automation testing.',
+  links:[
+    {
+      title:'Tài liệu SQA',
+      url:'https://example.com/sqa'
+    }
+  ]
+}
+
+];
+
+/* =========================
+RENDER SUBJECT
+========================= */
+
+function renderSubjects(){
+
+  const grid = document.getElementById('subjectGrid');
+
+  grid.innerHTML = '';
+
+  subjects.forEach(subject => {
+
+    const card = document.createElement('div');
+
+    card.className = 'subject-card fade-up';
+
+    card.innerHTML = `
+
+      <div class="subject-top">
+
+        <div class="subject-icon">
+          ${subject.icon}
+        </div>
+
+        <div class="subject-status">
+          ${subject.status}
+        </div>
+
+      </div>
+
+      <div class="subject-name">
+        ${subject.name}
+      </div>
+
+      <div class="subject-desc">
+        ${subject.desc}
+      </div>
+
+      <div class="link-list">
+
+        ${subject.links.map(link => `
+
+          <a class="study-link" href="${link.url}" target="_blank">
+
+            <div class="link-left">
+
+              <div class="link-title">
+                ${link.title}
+              </div>
+
+              <div class="link-url">
+                ${link.url}
+              </div>
+
+            </div>
+
+            <div class="link-arrow">
+              →
+            </div>
+
+          </a>
+
+        `).join('')}
+
+      </div>
+
+    `;
+
+    grid.appendChild(card);
+
+  });
+
+}
+
+/* =========================
+THÊM MÔN HỌC
+========================= */
+
+function addSubject(){
+
+  const name = document.getElementById('subjectName').value;
+  const icon = document.getElementById('subjectIcon').value;
+  const status = document.getElementById('subjectStatus').value;
+  const desc = document.getElementById('subjectDesc').value;
+
+  const linkTitle = document.getElementById('linkTitle').value;
+  const linkUrl = document.getElementById('linkUrl').value;
+
+  if(!name || !linkUrl){
+    alert('Vui lòng nhập đầy đủ dữ liệu');
+    return;
+  }
+
+  const newSubject = {
+
+    name:name,
+    icon:icon || '📘',
+    status:status || 'Mới',
+    desc:desc,
+
+    links:[
+      {
+        title:linkTitle || 'Tài liệu',
+        url:linkUrl
+      }
+    ]
+
+  };
+
+  subjects.push(newSubject);
+
+  localStorage.setItem('subjects', JSON.stringify(subjects));
+
+  renderSubjects();
+
+  document.getElementById('subjectName').value = '';
+  document.getElementById('subjectIcon').value = '';
+  document.getElementById('subjectStatus').value = '';
+  document.getElementById('subjectDesc').value = '';
+  document.getElementById('linkTitle').value = '';
+  document.getElementById('linkUrl').value = '';
+
+  alert('Đã thêm môn học thành công!');
+
+}
+
+/* =========================
+HIỆU ỨNG PARALLAX
+========================= */
+
+document.addEventListener('mousemove', e => {
+
+  const blobs = document.querySelectorAll('.blob');
+
+  blobs.forEach((blob,index)=>{
+
+    const speed = (index + 1) * 0.01;
+
+    const x = (window.innerWidth - e.pageX * speed) / 100;
+    const y = (window.innerHeight - e.pageY * speed) / 100;
+
+    blob.style.transform = `translate(${x}px, ${y}px)`;
+
+  });
+
+});
+
+/* INIT */
+
+renderSubjects();
+
+</script>
+
+</body>
+</html>
