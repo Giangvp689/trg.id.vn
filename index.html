@@ -1,705 +1,792 @@
+<!-- =========================
+TRG.ID.VN - STUDY PORTAL
+Version nâng cấp động + quản lý môn học + link tài liệu
+========================= -->
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trần Trường Giang — Developer</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TRG.ID.VN — Study Portal</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-:root {
-  --white: #ffffff;
-  --bg: #f0f7ff;
-  --bg2: #e8f3ff;
-  --card: rgba(255,255,255,0.85);
-  --card-border: rgba(96,165,250,0.25);
-  --blue-light: #dbeafe;
-  --blue: #3b82f6;
-  --blue-mid: #2563eb;
-  --blue-dark: #1d4ed8;
-  --teal: #0ea5e9;
-  --text: #0f172a;
-  --text2: #334155;
-  --muted: #64748b;
-  --mono: 'Fira Code', monospace;
-  --sans: 'Plus Jakarta Sans', sans-serif;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: var(--sans);
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
-  line-height: 1.6;
+:root{
+  --bg:#07111f;
+  --card:rgba(255,255,255,0.08);
+  --border:rgba(255,255,255,0.12);
+  --text:#ecf3ff;
+  --muted:#9fb0cf;
+  --blue:#4da3ff;
+  --cyan:#6ee7ff;
+  --purple:#7c6dff;
 }
 
-/* GRADIENT BG */
-body::before {
-  content: '';
-  position: fixed; inset: 0; z-index: -1;
-  background:
-    radial-gradient(ellipse 80% 50% at 10% 0%, rgba(186,230,253,0.6) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(219,234,254,0.7) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 60% at 50% 100%, rgba(224,242,254,0.5) 0%, transparent 60%),
-    linear-gradient(180deg, #f0f7ff 0%, #e8f3ff 50%, #f5f9ff 100%);
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  min-height:100vh;
+  position:relative;
 }
 
-/* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  padding: 0 2rem;
-  height: 60px;
-  display: flex; align-items: center; justify-content: space-between;
-  background: rgba(255,255,255,0.8);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(96,165,250,0.2);
-  box-shadow: 0 1px 20px rgba(59,130,246,0.08);
-}
-.nav-logo {
-  font-family: var(--mono);
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--blue-mid);
-  display: flex; align-items: center; gap: 8px;
-}
-.nav-logo::before {
-  content: '';
-  width: 8px; height: 8px;
-  background: var(--blue);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
-.nav-links { display: flex; gap: 0.5rem; list-style: none; }
-.nav-links a {
-  padding: 6px 14px;
-  border-radius: 20px;
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 500;
-  transition: all 0.2s;
-}
-.nav-links a:hover { background: var(--blue-light); color: var(--blue-dark); }
+/* BACKGROUND ANIMATION */
 
-/* HERO */
-#hero {
-  min-height: 100vh;
-  display: flex; align-items: center; justify-content: center;
-  padding: 5rem 2rem 3rem;
-  text-align: center;
-  position: relative;
-}
-.hero-inner { max-width: 700px; }
-
-/* Avatar from GitHub */
-.avatar-wrap {
-  position: relative; display: inline-block; margin-bottom: 1.5rem;
-}
-.avatar-ring {
-  position: absolute; inset: -4px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #3b82f6, #0ea5e9, #6366f1);
-  animation: spin 6s linear infinite;
-  z-index: 0;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.avatar-inner {
-  position: relative; z-index: 1;
-  width: 110px; height: 110px;
-  border-radius: 50%;
-  border: 3px solid white;
-  overflow: hidden;
-  background: var(--blue-light);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 2.5rem;
-}
-.avatar-inner img {
-  width: 100%; height: 100%;
-  object-fit: cover; border-radius: 50%;
+.bg-animation{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  z-index:-2;
 }
 
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 5px 14px;
-  background: var(--blue-light);
-  border: 1px solid rgba(59,130,246,0.3);
-  border-radius: 20px;
-  font-size: 12px; font-weight: 600;
-  color: var(--blue-dark);
-  margin-bottom: 1rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+.blob{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(80px);
+  opacity:0.45;
+  animation:float 12s infinite ease-in-out;
 }
 
-.hero-name {
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #1d4ed8 0%, #0ea5e9 50%, #6366f1 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
+.blob1{
+  width:400px;
+  height:400px;
+  background:#2563eb;
+  top:-100px;
+  left:-100px;
 }
 
-.hero-username {
-  font-family: var(--mono);
-  font-size: 0.95rem;
-  color: var(--blue);
-  margin-bottom: 1rem;
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-}
-.hero-username a { color: var(--blue); text-decoration: none; transition: color 0.2s; }
-.hero-username a:hover { color: var(--blue-dark); text-decoration: underline; }
-
-.hero-bio {
-  font-size: 1.05rem;
-  color: var(--text2);
-  max-width: 520px; margin: 0 auto 1.5rem;
-  line-height: 1.8;
-  min-height: 2rem;
+.blob2{
+  width:300px;
+  height:300px;
+  background:#7c3aed;
+  right:-80px;
+  top:30%;
+  animation-delay:2s;
 }
 
-/* Stats bar from GitHub */
-.github-stats {
-  display: inline-flex; gap: 0; margin-bottom: 2rem;
-  border-radius: 12px; overflow: hidden;
-  border: 1px solid rgba(59,130,246,0.2);
-  background: rgba(255,255,255,0.7);
-}
-.gh-stat {
-  padding: 10px 20px;
-  text-align: center;
-  border-right: 1px solid rgba(59,130,246,0.15);
-}
-.gh-stat:last-child { border-right: none; }
-.gh-stat-num {
-  font-size: 1.3rem; font-weight: 700;
-  color: var(--blue-dark); display: block;
-}
-.gh-stat-label { font-size: 11px; color: var(--muted); font-weight: 500; }
-
-.hero-btns {
-  display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;
-}
-.btn {
-  padding: 11px 24px; border-radius: 10px;
-  font-family: var(--sans); font-size: 14px; font-weight: 600;
-  cursor: pointer; text-decoration: none;
-  transition: all 0.2s; border: none;
-  display: inline-flex; align-items: center; gap: 8px;
-}
-.btn-primary {
-  background: linear-gradient(135deg, var(--blue-mid), var(--teal));
-  color: white;
-  box-shadow: 0 4px 14px rgba(37,99,235,0.35);
-}
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.45); }
-.btn-ghost {
-  background: rgba(255,255,255,0.8);
-  color: var(--text2);
-  border: 1px solid rgba(59,130,246,0.25);
-}
-.btn-ghost:hover { background: var(--blue-light); color: var(--blue-dark); transform: translateY(-2px); }
-
-/* SECTIONS */
-section:not(#hero) { padding: 5rem 2rem; }
-.container { max-width: 900px; margin: 0 auto; }
-.section-label {
-  font-family: var(--mono); font-size: 12px;
-  color: var(--blue); letter-spacing: 0.1em;
-  text-transform: uppercase; margin-bottom: 0.5rem;
-}
-.section-title {
-  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-  font-weight: 800; letter-spacing: -0.02em;
-  margin-bottom: 0.5rem; color: var(--text);
-}
-.section-line {
-  width: 40px; height: 3px;
-  background: linear-gradient(90deg, var(--blue), var(--teal));
-  border-radius: 3px; margin-bottom: 3rem;
+.blob3{
+  width:350px;
+  height:350px;
+  background:#06b6d4;
+  bottom:-120px;
+  left:30%;
+  animation-delay:4s;
 }
 
-/* ABOUT */
-#about { background: transparent; }
-.about-card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 20px;
-  padding: 2.5rem;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 30px rgba(59,130,246,0.08);
-  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
-}
-.about-text p { color: var(--text2); line-height: 1.9; margin-bottom: 1rem; font-size: 0.95rem; }
-.about-text p strong { color: var(--blue-dark); }
-.info-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.info-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 14px;
-  background: var(--blue-light);
-  border-radius: 10px;
-  font-size: 13px; color: var(--text2); font-weight: 500;
-}
-.info-item .icon { font-size: 16px; flex-shrink: 0; }
-.info-item a { color: var(--blue-mid); text-decoration: none; }
-.info-item a:hover { text-decoration: underline; }
-
-/* REPOS */
-#repos { background: transparent; }
-.repos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
-}
-.repo-card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 14px;
-  padding: 1.25rem 1.5rem;
-  transition: all 0.25s;
-  text-decoration: none; color: inherit;
-  display: flex; flex-direction: column;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 12px rgba(59,130,246,0.06);
-  position: relative; overflow: hidden;
-}
-.repo-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, var(--blue), var(--teal));
-  transform: scaleX(0); transition: transform 0.3s;
-  transform-origin: left;
-}
-.repo-card:hover::before { transform: scaleX(1); }
-.repo-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(59,130,246,0.15); border-color: rgba(59,130,246,0.4); }
-.repo-name {
-  font-family: var(--mono); font-size: 14px; font-weight: 500;
-  color: var(--blue-mid); margin-bottom: 6px;
-  display: flex; align-items: center; gap: 6px;
-}
-.repo-name svg { width: 14px; height: 14px; flex-shrink: 0; }
-.repo-desc {
-  font-size: 13px; color: var(--muted); line-height: 1.6;
-  flex: 1; margin-bottom: 1rem;
-  min-height: 36px;
-}
-.repo-meta { display: flex; gap: 12px; align-items: center; }
-.repo-lang {
-  display: flex; align-items: center; gap: 5px;
-  font-size: 12px; color: var(--muted);
-}
-.lang-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.repo-stars { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--muted); }
-
-/* SKILLS */
-#skills { background: transparent; }
-.skills-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-.skill-pill {
-  display: flex; align-items: center; gap: 6px;
-  padding: 7px 16px;
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 20px;
-  font-size: 13px; font-weight: 600; color: var(--text2);
-  backdrop-filter: blur(10px);
-  transition: all 0.2s;
-}
-.skill-pill:hover { background: var(--blue-light); border-color: rgba(59,130,246,0.4); color: var(--blue-dark); transform: translateY(-2px); }
-.skill-section { margin-bottom: 2rem; }
-.skill-section-title { font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; }
-
-/* CONTACT */
-#contact { background: transparent; text-align: center; }
-.contact-card {
-  background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(14,165,233,0.08));
-  border: 1px solid rgba(59,130,246,0.25);
-  border-radius: 24px;
-  padding: 3.5rem 2rem;
-  backdrop-filter: blur(10px);
-  max-width: 600px; margin: 0 auto;
-}
-.contact-card h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800; letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text; margin-bottom: 1rem;
-}
-.contact-card p { color: var(--text2); margin-bottom: 2rem; line-height: 1.8; }
-.contact-email {
-  display: inline-block;
-  font-family: var(--mono); font-size: 1.1rem; color: var(--blue-mid);
-  text-decoration: none; margin-bottom: 2rem;
-  padding: 10px 24px;
-  background: rgba(59,130,246,0.08);
-  border-radius: 10px;
-  border: 1px solid rgba(59,130,246,0.2);
-  transition: all 0.2s;
-}
-.contact-email:hover { background: var(--blue-light); border-color: var(--blue); }
-.social-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-.social-link {
-  display: flex; align-items: center; gap: 8px;
-  padding: 10px 20px;
-  background: rgba(255,255,255,0.8);
-  border: 1px solid rgba(59,130,246,0.2);
-  border-radius: 10px;
-  text-decoration: none; color: var(--text2);
-  font-size: 13px; font-weight: 600;
-  transition: all 0.2s;
-}
-.social-link:hover { background: var(--blue-light); border-color: var(--blue); color: var(--blue-dark); transform: translateY(-2px); }
-.social-link svg { width: 18px; height: 18px; }
-
-/* FOOTER */
-footer {
-  padding: 1.5rem 2rem;
-  text-align: center;
-  border-top: 1px solid rgba(59,130,246,0.15);
-  background: rgba(255,255,255,0.5);
-  color: var(--muted); font-size: 13px;
-}
-footer a { color: var(--blue); text-decoration: none; }
-
-/* REVEAL */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-
-/* LOADING */
-.loading { opacity: 0.4; font-size: 13px; color: var(--muted); font-style: italic; }
-
-/* RESPONSIVE */
-@media (max-width: 700px) {
-  nav { padding: 0 1rem; }
-  .nav-links { display: none; }
-  .about-card { grid-template-columns: 1fr; gap: 2rem; }
-  .github-stats { flex-wrap: wrap; }
-  section:not(#hero) { padding: 3.5rem 1rem; }
-}
-</style>
-</head>
-<body>
-
-<nav>
-  <div class="nav-logo">Giangvp689</div>
-  <ul class="nav-links">
-    <li><a href="#about">Về tôi</a></li>
-    <li><a href="#repos">Dự án</a></li>
-    <li><a href="#skills">Kỹ năng</a></li>
-    <li><a href="#contact">Liên hệ</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-inner">
-    <div class="avatar-wrap">
-      <div class="avatar-ring"></div>
-      <div class="avatar-inner" id="avatar">
-        <span>TG</span>
-      </div>
-    </div>
-
-    <div class="hero-badge">👨‍💻 Developer · Việt Nam</div>
-
-    <h1 class="hero-name" id="hero-name">Trần Trường Giang</h1>
-
-    <div class="hero-username">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-      <a href="https://github.com/Giangvp689" target="_blank">@Giangvp689</a>
-    </div>
-
-    <p class="hero-bio" id="hero-bio">Full-Stack Developer · Yêu thích công nghệ và xây dựng sản phẩm thực tế</p>
-
-    <div class="github-stats" id="gh-stats">
-      <div class="gh-stat">
-        <span class="gh-stat-num" id="stat-repos">—</span>
-        <span class="gh-stat-label">Repos</span>
-      </div>
-      <div class="gh-stat">
-        <span class="gh-stat-num" id="stat-followers">—</span>
-        <span class="gh-stat-label">Followers</span>
-      </div>
-      <div class="gh-stat">
-        <span class="gh-stat-num" id="stat-following">—</span>
-        <span class="gh-stat-label">Following</span>
-      </div>
-    </div>
-
-    <div class="hero-btns">
-      <a href="https://github.com/Giangvp689" target="_blank" class="btn btn-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-        GitHub Profile
-      </a>
-      <a href="#contact" class="btn btn-ghost">Liên hệ tôi →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="container reveal">
-    <p class="section-label">// 01 · About</p>
-    <h2 class="section-title">Về tôi</h2>
-    <div class="section-line"></div>
-    <div class="about-card">
-      <div class="about-text">
-        <p>Xin chào! Tôi là <strong>Trần Trường Giang</strong>, một developer đam mê xây dựng những sản phẩm web hiện đại và có giá trị thực tế.</p>
-        <p>Tôi thích học công nghệ mới, viết code sạch và giải quyết những bài toán thú vị. Mục tiêu của tôi là tạo ra những sản phẩm vừa đẹp vừa hiệu quả.</p>
-        <p id="about-extra" style="display:none"></p>
-      </div>
-      <ul class="info-list" id="info-list">
-        <li class="info-item">
-          <span class="icon">📍</span>
-          <span id="info-location">Bắc Ninh, Việt Nam</span>
-        </li>
-        <li class="info-item">
-          <span class="icon">🐱</span>
-          <a href="https://github.com/Giangvp689" target="_blank">github.com/Giangvp689</a>
-        </li>
-        <li class="info-item">
-          <span class="icon">📧</span>
-          <a href="mailto:giangvp689@gmail.com">giangvp689@gmail.com</a>
-        </li>
-        <li class="info-item" id="info-blog-wrap" style="display:none">
-          <span class="icon">🌐</span>
-          <a href="https://trg.id.vn" target="_blank">trg.id.vn</a>
-        </li>
-        <li class="info-item">
-          <span class="icon">🌐</span>
-          <a href="https://trg.id.vn">trg.id.vn</a>
-        </li>
-        <li class="info-item" id="info-company-wrap" style="display:none">
-          <span class="icon">🏢</span>
-          <span id="info-company"></span>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- REPOS -->
-<section id="repos">
-  <div class="container reveal">
-    <p class="section-label">// 02 · Projects</p>
-    <h2 class="section-title">Repositories</h2>
-    <div class="section-line"></div>
-    <div class="repos-grid" id="repos-grid">
-      <p class="loading">Đang tải repos từ GitHub...</p>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="container reveal">
-    <p class="section-label">// 03 · Skills</p>
-    <h2 class="section-title">Tech Stack</h2>
-    <div class="section-line"></div>
-    <div id="skills-content">
-      <div class="skill-section">
-        <div class="skill-section-title">Phát hiện từ GitHub repos</div>
-        <div class="skills-row" id="skills-detected">
-          <p class="loading">Đang phân tích ngôn ngữ...</p>
-        </div>
-      </div>
-      <div class="skill-section" style="margin-top: 1.5rem;">
-        <div class="skill-section-title">Tools & Platform</div>
-        <div class="skills-row">
-          <span class="skill-pill">🐱 Git & GitHub</span>
-          <span class="skill-pill">🐳 Docker</span>
-          <span class="skill-pill">🐧 Linux</span>
-          <span class="skill-pill">⚡ VS Code</span>
-          <span class="skill-pill">🔄 CI/CD</span>
-          <span class="skill-pill">☁️ Cloud Deploy</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container reveal">
-    <div class="contact-card">
-      <p class="section-label" style="text-align:center; margin-bottom:0.5rem;">// 04 · Contact</p>
-      <h2>Hãy kết nối!</h2>
-      <p>Bạn có ý tưởng thú vị hoặc cơ hội hợp tác? Tôi luôn sẵn sàng lắng nghe và trao đổi.</p>
-      <div>
-        <a href="mailto:giangvp689@gmail.com" class="contact-email">giangvp689@gmail.com</a>
-      </div>
-      <div class="social-links">
-        <a href="https://github.com/Giangvp689" target="_blank" class="social-link">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-          GitHub
-        </a>
-        <a href="https://trg.id.vn" class="social-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          trg.id.vn
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <p>© 2025 Trần Trường Giang · <a href="https://github.com/Giangvp689" target="_blank">@Giangvp689</a> · <a href="https://trg.id.vn">trg.id.vn</a></p>
-</footer>
-
-<script>
-const GH_USER = 'Giangvp689';
-const API = 'https://api.github.com';
-
-const langColors = {
-  JavaScript:'#f1e05a', TypeScript:'#3178c6', Python:'#3572A5',
-  HTML:'#e34c26', CSS:'#563d7c', Vue:'#41b883', React:'#61dafb',
-  Java:'#b07219', 'C#':'#178600', PHP:'#4F5D95', Go:'#00ADD8',
-  Rust:'#dea584', Ruby:'#701516', Kotlin:'#A97BFF', Swift:'#F05138',
-  Dart:'#00B4AB', Shell:'#89e051', Dockerfile:'#384d54',
-  'C++':'#f34b7d', C:'#555555', Scss:'#c6538c'
-};
-
-async function loadGitHub() {
-  try {
-    // Fetch user profile
-    const res = await fetch(`${API}/users/${GH_USER}`);
-    const user = await res.json();
-
-    // Avatar
-    if (user.avatar_url) {
-      const av = document.getElementById('avatar');
-      av.innerHTML = `<img src="${user.avatar_url}" alt="${user.name || GH_USER}">`;
-    }
-
-    // Name
-    if (user.name) document.getElementById('hero-name').textContent = user.name;
-
-    // Bio
-    if (user.bio) document.getElementById('hero-bio').textContent = user.bio;
-
-    // Stats
-    document.getElementById('stat-repos').textContent = user.public_repos || 0;
-    document.getElementById('stat-followers').textContent = user.followers || 0;
-    document.getElementById('stat-following').textContent = user.following || 0;
-
-    // Location
-    if (user.location) document.getElementById('info-location').textContent = user.location;
-
-    // Company
-    if (user.company) {
-      document.getElementById('info-company').textContent = user.company;
-      document.getElementById('info-company-wrap').style.display = 'flex';
-    }
-
-    // Blog
-    if (user.blog && user.blog !== 'https://trg.id.vn' && user.blog !== 'trg.id.vn') {
-      document.getElementById('info-blog-wrap').style.display = 'flex';
-      document.getElementById('info-blog-wrap').querySelector('a').href = user.blog;
-      document.getElementById('info-blog-wrap').querySelector('a').textContent = user.blog.replace(/^https?:\/\//, '');
-    }
-
-    // Update email
-    if (user.email) {
-      document.querySelector('.contact-email').href = 'mailto:' + user.email;
-      document.querySelector('.contact-email').textContent = user.email;
-    }
-
-    // Page title
-    if (user.name) document.title = `${user.name} — Developer`;
-
-  } catch(e) { console.log('Profile load error', e); }
-
-  // Fetch repos
-  try {
-    const res = await fetch(`${API}/users/${GH_USER}/repos?sort=updated&per_page=30`);
-    const repos = await res.json();
-
-    const grid = document.getElementById('repos-grid');
-    grid.innerHTML = '';
-
-    // Sort by stars + updated, take top 9
-    const sorted = repos
-      .filter(r => !r.fork)
-      .sort((a,b) => (b.stargazers_count - a.stargazers_count) || new Date(b.updated_at) - new Date(a.updated_at))
-      .slice(0, 9);
-
-    if (sorted.length === 0) {
-      grid.innerHTML = '<p style="color:var(--muted);font-size:14px;">Chưa có repo public nào.</p>';
-    } else {
-      sorted.forEach(repo => {
-        const color = langColors[repo.language] || '#94a3b8';
-        const desc = repo.description || 'Chưa có mô tả';
-        const card = document.createElement('a');
-        card.className = 'repo-card';
-        card.href = repo.html_url;
-        card.target = '_blank';
-        card.innerHTML = `
-          <div class="repo-name">
-            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8z"/></svg>
-            ${repo.name}
-          </div>
-          <p class="repo-desc">${desc}</p>
-          <div class="repo-meta">
-            ${repo.language ? `<span class="repo-lang"><span class="lang-dot" style="background:${color}"></span>${repo.language}</span>` : ''}
-            <span class="repo-stars">⭐ ${repo.stargazers_count}</span>
-            ${repo.forks_count > 0 ? `<span class="repo-stars">🍴 ${repo.forks_count}</span>` : ''}
-          </div>`;
-        grid.appendChild(card);
-      });
-    }
-
-    // Auto-detect languages for skills
-    const langMap = {};
-    repos.forEach(r => {
-      if (r.language) langMap[r.language] = (langMap[r.language] || 0) + 1;
-    });
-    const skillsEl = document.getElementById('skills-detected');
-    skillsEl.innerHTML = '';
-    const sorted2 = Object.entries(langMap).sort((a,b)=>b[1]-a[1]);
-    if (sorted2.length === 0) {
-      skillsEl.innerHTML = '<span class="skill-pill">Đang cập nhật...</span>';
-    } else {
-      sorted2.forEach(([lang, count]) => {
-        const color = langColors[lang] || '#94a3b8';
-        const pill = document.createElement('span');
-        pill.className = 'skill-pill';
-        pill.innerHTML = `<span style="width:10px;height:10px;background:${color};border-radius:50%;display:inline-block"></span> ${lang} <span style="font-size:11px;color:var(--muted);margin-left:2px">(${count})</span>`;
-        skillsEl.appendChild(pill);
-      });
-    }
-
-  } catch(e) {
-    document.getElementById('repos-grid').innerHTML = '<p style="color:var(--muted)">Không thể tải repos. Vui lòng thử lại.</p>';
-    console.log('Repos load error', e);
+@keyframes float{
+  0%,100%{
+    transform:translateY(0px) translateX(0px);
+  }
+  50%{
+    transform:translateY(-40px) translateX(20px);
   }
 }
 
-// Scroll reveal
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+.grid-bg{
+  position:fixed;
+  inset:0;
+  background-image:
+  linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size:40px 40px;
+  z-index:-1;
+}
 
-// Nav active
-const secs = document.querySelectorAll('section[id]');
-const navAs = document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll', () => {
-  let cur = '';
-  secs.forEach(s => { if(window.scrollY >= s.offsetTop - 150) cur = s.id; });
-  navAs.forEach(a => {
-    a.style.background = a.getAttribute('href') === '#'+cur ? 'var(--blue-light)' : '';
-    a.style.color = a.getAttribute('href') === '#'+cur ? 'var(--blue-dark)' : '';
+/* NAV */
+
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 40px;
+  background:rgba(5,10,20,0.5);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  z-index:999;
+}
+
+.logo{
+  font-size:1.1rem;
+  font-weight:800;
+  letter-spacing:1px;
+  background:linear-gradient(90deg,#fff,#6ee7ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.nav-links{
+  display:flex;
+  gap:10px;
+}
+
+.nav-links a{
+  color:#dbeafe;
+  text-decoration:none;
+  padding:10px 18px;
+  border-radius:12px;
+  transition:0.3s;
+  font-size:14px;
+}
+
+.nav-links a:hover{
+  background:rgba(255,255,255,0.08);
+}
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:120px 20px 60px;
+  position:relative;
+}
+
+.hero-inner{
+  max-width:900px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 18px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+  margin-bottom:25px;
+  animation:fadeUp 1s ease;
+}
+
+.hero h1{
+  font-size:clamp(3rem,7vw,6rem);
+  line-height:1;
+  margin-bottom:20px;
+  font-weight:800;
+  background:linear-gradient(135deg,#fff,#6ee7ff,#4da3ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:fadeUp 1s ease;
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:1.15rem;
+  line-height:1.8;
+  max-width:700px;
+  margin:auto;
+  animation:fadeUp 1.3s ease;
+}
+
+.hero-buttons{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-top:35px;
+}
+
+.btn{
+  padding:14px 26px;
+  border-radius:14px;
+  text-decoration:none;
+  font-weight:700;
+  transition:0.3s;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,#2563eb,#06b6d4);
+  color:white;
+  box-shadow:0 10px 30px rgba(37,99,235,0.4);
+}
+
+.btn-primary:hover{
+  transform:translateY(-5px);
+}
+
+.btn-ghost{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.1);
+  color:white;
+}
+
+.btn-ghost:hover{
+  background:rgba(255,255,255,0.12);
+}
+
+/* SECTION */
+
+.section{
+  padding:100px 20px;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+}
+
+.section-title{
+  font-size:2.4rem;
+  margin-bottom:15px;
+  font-weight:800;
+}
+
+.section-desc{
+  color:var(--muted);
+  margin-bottom:50px;
+}
+
+/* SUBJECT GRID */
+
+.subject-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:25px;
+}
+
+.subject-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:24px;
+  padding:28px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+  backdrop-filter:blur(16px);
+  transition:0.4s;
+}
+
+.subject-card::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.08),transparent);
+  opacity:0;
+  transition:0.4s;
+}
+
+.subject-card:hover::before{
+  opacity:1;
+}
+
+.subject-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(110,231,255,0.3);
+  box-shadow:0 20px 50px rgba(0,0,0,0.3);
+}
+
+.subject-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:20px;
+}
+
+.subject-icon{
+  width:60px;
+  height:60px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#2563eb,#06b6d4);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.5rem;
+  box-shadow:0 10px 30px rgba(37,99,235,0.4);
+}
+
+.subject-status{
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(34,197,94,0.15);
+  color:#86efac;
+  font-size:12px;
+  font-weight:700;
+}
+
+.subject-name{
+  font-size:1.4rem;
+  font-weight:800;
+  margin-bottom:10px;
+}
+
+.subject-desc{
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:20px;
+}
+
+/* LINKS */
+
+.link-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.study-link{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 18px;
+  border-radius:14px;
+  background:rgba(255,255,255,0.06);
+  text-decoration:none;
+  color:white;
+  transition:0.3s;
+  border:1px solid transparent;
+}
+
+.study-link:hover{
+  transform:translateX(6px);
+  border-color:rgba(110,231,255,0.3);
+  background:rgba(255,255,255,0.1);
+}
+
+.link-left{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+
+.link-title{
+  font-size:14px;
+  font-weight:700;
+}
+
+.link-url{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.link-arrow{
+  font-size:1.2rem;
+}
+
+/* ADMIN PANEL */
+
+.admin-panel{
+  margin-top:60px;
+  padding:30px;
+  border-radius:24px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+}
+
+.admin-panel h3{
+  margin-bottom:20px;
+  font-size:1.5rem;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+
+input, textarea{
+  width:100%;
+  padding:14px;
+  border:none;
+  outline:none;
+  border-radius:14px;
+  background:rgba(255,255,255,0.08);
+  color:white;
+  font-family:inherit;
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.save-btn{
+  margin-top:20px;
+  padding:14px 24px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(135deg,#2563eb,#06b6d4);
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.save-btn:hover{
+  transform:translateY(-3px);
+}
+
+/* FOOTER */
+
+footer{
+  padding:50px 20px;
+  text-align:center;
+  color:var(--muted);
+}
+
+/* ANIMATION */
+
+.fade-up{
+  animation:fadeUp 1s ease;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(40px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+  nav{
+    padding:0 20px;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  .hero{
+    padding-top:140px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg-animation">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+</div>
+
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+
+<nav>
+  <div class="logo">TRG.ID.VN</div>
+
+  <div class="nav-links">
+    <a href="#subjects">Môn học</a>
+    <a href="#admin">Quản lý</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-inner">
+
+    <div class="badge">
+      🚀 STUDY PORTAL · TRẦN TRƯỜNG GIANG
+    </div>
+
+    <h1>Study Sharing System</h1>
+
+    <p>
+      Hệ thống chia sẻ tài liệu học tập cá nhân. 
+      Tất cả bạn bè muốn truy cập link học tập đều phải đi qua 
+      <strong>trg.id.vn</strong> trước.
+      <br><br>
+      Bạn có thể thêm môn học, tài liệu, hướng dẫn, GitHub, video, website...
+      và chỉnh sửa bất cứ lúc nào.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#subjects" class="btn btn-primary">Xem môn học</a>
+      <a href="#admin" class="btn btn-ghost">Quản lý dữ liệu</a>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- SUBJECTS -->
+
+<section class="section" id="subjects">
+
+  <div class="container">
+
+    <h2 class="section-title">📚 Môn học của tôi</h2>
+
+    <p class="section-desc">
+      Tất cả tài liệu học tập, hướng dẫn và link được quản lý tập trung.
+    </p>
+
+    <div class="subject-grid" id="subjectGrid"></div>
+
+  </div>
+
+</section>
+
+<!-- ADMIN -->
+
+<section class="section" id="admin">
+
+  <div class="container">
+
+    <div class="admin-panel">
+
+      <h3>⚙️ Thêm môn học mới</h3>
+
+      <div class="form-grid">
+
+        <input type="text" id="subjectName" placeholder="Tên môn học">
+        
+        <input type="text" id="subjectIcon" placeholder="Emoji icon VD: 🗺️">
+
+        <input type="text" id="subjectStatus" placeholder="Trạng thái VD: Đang học">
+
+      </div>
+
+      <br>
+
+      <textarea id="subjectDesc" placeholder="Mô tả môn học"></textarea>
+
+      <br><br>
+
+      <h3>🔗 Thêm link học tập</h3>
+
+      <div class="form-grid">
+
+        <input type="text" id="linkTitle" placeholder="Tên link">
+
+        <input type="text" id="linkUrl" placeholder="https://...">
+
+      </div>
+
+      <button class="save-btn" onclick="addSubject()">
+        + Thêm môn học
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+  © 2026 TRG.ID.VN · Powered by Trần Trường Giang
+</footer>
+
+<script>
+
+/* =========================
+DỮ LIỆU MÔN HỌC
+========================= */
+
+let subjects = JSON.parse(localStorage.getItem('subjects')) || [
+
+{
+  name:'Hệ thống thông tin địa lý GIS',
+  icon:'🗺️',
+  status:'Đang học',
+  desc:'Tài liệu GIS, bản đồ số, QGIS, ArcGIS và các bài thực hành.',
+  links:[
+    {
+      title:'Website GIS',
+      url:'https://gis.vn'
+    },
+    {
+      title:'Hướng dẫn QGIS',
+      url:'https://qgis.org'
+    }
+  ]
+},
+
+{
+  name:'Software Quality Assurance',
+  icon:'💻',
+  status:'Đang học',
+  desc:'Tài liệu kiểm thử phần mềm, SQA, review và automation testing.',
+  links:[
+    {
+      title:'Tài liệu SQA',
+      url:'https://example.com/sqa'
+    }
+  ]
+}
+
+];
+
+/* =========================
+RENDER SUBJECT
+========================= */
+
+function renderSubjects(){
+
+  const grid = document.getElementById('subjectGrid');
+
+  grid.innerHTML = '';
+
+  subjects.forEach(subject => {
+
+    const card = document.createElement('div');
+
+    card.className = 'subject-card fade-up';
+
+    card.innerHTML = `
+
+      <div class="subject-top">
+
+        <div class="subject-icon">
+          ${subject.icon}
+        </div>
+
+        <div class="subject-status">
+          ${subject.status}
+        </div>
+
+      </div>
+
+      <div class="subject-name">
+        ${subject.name}
+      </div>
+
+      <div class="subject-desc">
+        ${subject.desc}
+      </div>
+
+      <div class="link-list">
+
+        ${subject.links.map(link => `
+
+          <a class="study-link" href="${link.url}" target="_blank">
+
+            <div class="link-left">
+
+              <div class="link-title">
+                ${link.title}
+              </div>
+
+              <div class="link-url">
+                ${link.url}
+              </div>
+
+            </div>
+
+            <div class="link-arrow">
+              →
+            </div>
+
+          </a>
+
+        `).join('')}
+
+      </div>
+
+    `;
+
+    grid.appendChild(card);
+
   });
+
+}
+
+/* =========================
+THÊM MÔN HỌC
+========================= */
+
+function addSubject(){
+
+  const name = document.getElementById('subjectName').value;
+  const icon = document.getElementById('subjectIcon').value;
+  const status = document.getElementById('subjectStatus').value;
+  const desc = document.getElementById('subjectDesc').value;
+
+  const linkTitle = document.getElementById('linkTitle').value;
+  const linkUrl = document.getElementById('linkUrl').value;
+
+  if(!name || !linkUrl){
+    alert('Vui lòng nhập đầy đủ dữ liệu');
+    return;
+  }
+
+  const newSubject = {
+
+    name:name,
+    icon:icon || '📘',
+    status:status || 'Mới',
+    desc:desc,
+
+    links:[
+      {
+        title:linkTitle || 'Tài liệu',
+        url:linkUrl
+      }
+    ]
+
+  };
+
+  subjects.push(newSubject);
+
+  localStorage.setItem('subjects', JSON.stringify(subjects));
+
+  renderSubjects();
+
+  document.getElementById('subjectName').value = '';
+  document.getElementById('subjectIcon').value = '';
+  document.getElementById('subjectStatus').value = '';
+  document.getElementById('subjectDesc').value = '';
+  document.getElementById('linkTitle').value = '';
+  document.getElementById('linkUrl').value = '';
+
+  alert('Đã thêm môn học thành công!');
+
+}
+
+/* =========================
+HIỆU ỨNG PARALLAX
+========================= */
+
+document.addEventListener('mousemove', e => {
+
+  const blobs = document.querySelectorAll('.blob');
+
+  blobs.forEach((blob,index)=>{
+
+    const speed = (index + 1) * 0.01;
+
+    const x = (window.innerWidth - e.pageX * speed) / 100;
+    const y = (window.innerHeight - e.pageY * speed) / 100;
+
+    blob.style.transform = `translate(${x}px, ${y}px)`;
+
+  });
+
 });
 
-loadGitHub();
+/* INIT */
+
+renderSubjects();
+
 </script>
+
 </body>
 </html>
