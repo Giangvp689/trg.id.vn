@@ -1,934 +1,866 @@
+```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trần Trường Giang · trg.id.vn</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Trần Trường Giang · Software Engineer</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
-/* ===================== RESET & BASE ===================== */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --bg: #f0f6ff;
-  --white: #ffffff;
-  --card: rgba(255,255,255,0.72);
-  --card-border: rgba(99,163,255,0.22);
-  --blue-50: #eff6ff;
-  --blue-100: #dbeafe;
-  --blue-200: #bfdbfe;
-  --blue-400: #60a5fa;
-  --blue-500: #3b82f6;
-  --blue-600: #2563eb;
-  --blue-700: #1d4ed8;
-  --sky-400: #38bdf8;
-  --sky-500: #0ea5e9;
-  --text: #0f172a;
-  --text2: #1e3a5f;
-  --muted: #64748b;
-  --sans: 'Outfit', sans-serif;
-  --mono: 'JetBrains Mono', monospace;
-}
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--sans);
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
-  min-height: 100vh;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-/* ===================== ANIMATED BG ===================== */
-#bg-canvas {
-  position: fixed; inset: 0; z-index: 0;
-  pointer-events: none;
-}
-.orb {
-  position: fixed; border-radius: 50%;
-  filter: blur(80px); pointer-events: none; z-index: 0;
-  animation: orbFloat linear infinite;
-}
-.orb1 { width: 500px; height: 500px; background: rgba(96,165,250,0.18); top: -100px; left: -100px; animation-duration: 20s; }
-.orb2 { width: 400px; height: 400px; background: rgba(56,189,248,0.15); top: 30%; right: -100px; animation-duration: 25s; animation-delay: -8s; }
-.orb3 { width: 350px; height: 350px; background: rgba(99,102,241,0.1); bottom: 10%; left: 20%; animation-duration: 18s; animation-delay: -5s; }
-.orb4 { width: 250px; height: 250px; background: rgba(37,99,235,0.12); top: 60%; right: 30%; animation-duration: 22s; animation-delay: -12s; }
-@keyframes orbFloat {
-  0%,100% { transform: translate(0,0) scale(1); }
-  25% { transform: translate(30px,-40px) scale(1.05); }
-  50% { transform: translate(-20px, 30px) scale(0.95); }
-  75% { transform: translate(40px, 20px) scale(1.02); }
+:root{
+  --bg:#eef6ff;
+  --card:rgba(255,255,255,0.72);
+  --border:rgba(120,160,255,0.18);
+
+  --blue:#2563eb;
+  --sky:#0ea5e9;
+  --cyan:#38bdf8;
+  --purple:#6366f1;
+
+  --text:#0f172a;
+  --muted:#64748b;
+
+  --shadow:0 10px 40px rgba(37,99,235,0.12);
 }
 
-/* ===================== NAV ===================== */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  height: 58px;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 2.5rem;
-  background: rgba(240,246,255,0.82);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(99,163,255,0.18);
-}
-.nav-brand {
-  display: flex; align-items: center; gap: 10px;
-  font-family: var(--mono); font-size: 0.9rem; font-weight: 500;
-  color: var(--blue-600); text-decoration: none;
-}
-.nav-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: var(--blue-500);
-  animation: pulse 2s ease-in-out infinite;
-}
-@keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,0.5)} 50%{box-shadow:0 0 0 8px rgba(59,130,246,0)} }
-.nav-links { display: flex; gap: 4px; list-style: none; }
-.nav-links a {
-  padding: 6px 16px; border-radius: 30px;
-  color: var(--muted); text-decoration: none;
-  font-size: 13px; font-weight: 600; transition: all 0.25s;
-}
-.nav-links a:hover, .nav-links a.active {
-  background: var(--blue-100); color: var(--blue-700);
+html{
+  scroll-behavior:smooth;
 }
 
-/* ===================== HERO ===================== */
-#hero {
-  position: relative; z-index: 1;
-  min-height: 100vh;
-  display: flex; align-items: center; justify-content: center;
-  padding: 5rem 2rem 3rem;
-  text-align: center;
+body{
+  font-family:'Outfit',sans-serif;
+  background:linear-gradient(180deg,#eef6ff 0%,#f8fbff 100%);
+  color:var(--text);
+  overflow-x:hidden;
 }
-.hero-inner { max-width: 720px; }
-/* avatar */
-.avatar-wrap {
-  display: inline-block; position: relative; margin-bottom: 1.8rem;
-}
-.avatar-ring-outer {
-  position: absolute; inset: -6px; border-radius: 50%;
-  background: conic-gradient(from 0deg, #3b82f6, #0ea5e9, #6366f1, #3b82f6);
-  animation: spin 5s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.avatar-ring-inner {
-  position: absolute; inset: -3px; border-radius: 50%;
-  background: var(--bg);
-}
-.avatar-img {
-  position: relative; z-index: 1;
-  width: 120px; height: 120px; border-radius: 50%;
-  overflow: hidden; background: var(--blue-100);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 2.8rem;
-  border: 3px solid white;
-}
-.avatar-img img { width: 100%; height: 100%; object-fit: cover; }
-.avatar-badge {
-  position: absolute; bottom: 4px; right: -2px; z-index: 2;
-  width: 28px; height: 28px; border-radius: 50%;
-  background: white; border: 2px solid var(--blue-200);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 14px;
-}
-/* hero text */
-.hero-tag {
-  display: inline-flex; align-items: center; gap: 7px;
-  padding: 5px 16px; border-radius: 30px;
-  background: var(--blue-100);
-  border: 1px solid rgba(59,130,246,0.3);
-  font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
-  color: var(--blue-700); text-transform: uppercase;
-  margin-bottom: 1.2rem;
-  animation: fadeUp 0.6s ease both;
-}
-.hero-name {
-  font-size: clamp(2.6rem, 7vw, 4.5rem);
-  font-weight: 900; letter-spacing: -0.04em;
-  line-height: 1.05; margin-bottom: 0.4rem;
-  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 30%, #0ea5e9 70%, #38bdf8 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  animation: fadeUp 0.6s 0.1s ease both;
-}
-.hero-typing {
-  font-family: var(--mono); font-size: 1rem;
-  color: var(--sky-500); margin-bottom: 1.2rem;
-  min-height: 1.5rem;
-  animation: fadeUp 0.6s 0.2s ease both;
-}
-.cursor { display: inline-block; width: 2px; height: 1em; background: var(--sky-500); vertical-align: middle; margin-left: 2px; animation: blink 1s step-end infinite; }
-@keyframes blink { 50% { opacity: 0; } }
-.hero-desc {
-  font-size: 1rem; color: var(--muted); max-width: 500px;
-  margin: 0 auto 1.6rem; line-height: 1.85;
-  animation: fadeUp 0.6s 0.3s ease both;
-}
-/* github stats strip */
-.gh-strip {
-  display: inline-flex; border-radius: 14px; overflow: hidden;
-  border: 1px solid rgba(59,130,246,0.2);
-  background: rgba(255,255,255,0.65);
-  backdrop-filter: blur(10px);
-  margin-bottom: 1.8rem;
-  animation: fadeUp 0.6s 0.35s ease both;
-}
-.gh-strip-item {
-  padding: 10px 22px; text-align: center;
-  border-right: 1px solid rgba(59,130,246,0.12);
-}
-.gh-strip-item:last-child { border-right: none; }
-.gh-num { font-size: 1.4rem; font-weight: 800; color: var(--blue-700); display: block; line-height: 1; }
-.gh-lbl { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px; }
-/* hero buttons */
-.hero-btns {
-  display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;
-  animation: fadeUp 0.6s 0.4s ease both;
-}
-.btn {
-  display: inline-flex; align-items: center; gap: 7px;
-  padding: 11px 24px; border-radius: 12px;
-  font-family: var(--sans); font-size: 14px; font-weight: 700;
-  text-decoration: none; transition: all 0.25s; cursor: pointer; border: none;
-}
-.btn-blue {
-  background: linear-gradient(135deg, var(--blue-600), var(--sky-500));
-  color: white;
-  box-shadow: 0 4px 18px rgba(37,99,235,0.35);
-}
-.btn-blue:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(37,99,235,0.45); }
-.btn-white {
-  background: rgba(255,255,255,0.85); color: var(--text2);
-  border: 1px solid rgba(59,130,246,0.25);
-  backdrop-filter: blur(8px);
-}
-.btn-white:hover { background: var(--blue-100); color: var(--blue-700); transform: translateY(-3px); }
-/* scroll indicator */
-.scroll-hint {
-  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
-  color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
-  text-transform: uppercase; animation: fadeUp 1s 0.8s ease both;
-}
-.scroll-arrow {
-  width: 28px; height: 28px; border-radius: 50%;
-  border: 1.5px solid rgba(59,130,246,0.35);
-  display: flex; align-items: center; justify-content: center;
-  animation: bounce 2s ease-in-out infinite;
-}
-@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
 
-/* ===================== SECTIONS COMMON ===================== */
-section:not(#hero) { position: relative; z-index: 1; padding: 5rem 2rem; }
-.container { max-width: 960px; margin: 0 auto; }
-.sec-eyebrow {
-  font-family: var(--mono); font-size: 11px;
-  color: var(--blue-500); letter-spacing: 0.12em;
-  text-transform: uppercase; margin-bottom: 0.4rem;
-}
-.sec-title {
-  font-size: clamp(1.9rem, 4vw, 2.8rem);
-  font-weight: 800; letter-spacing: -0.03em;
-  color: var(--text); margin-bottom: 0.4rem;
-}
-.sec-rule {
-  width: 44px; height: 3px; border-radius: 3px;
-  background: linear-gradient(90deg, var(--blue-500), var(--sky-400));
-  margin-bottom: 2.8rem;
-}
-/* reveal anim */
-.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
-.reveal.in { opacity: 1; transform: none; }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
+/* ===== BACKGROUND ===== */
 
-/* ===================== COURSES SECTION ===================== */
-#courses { background: transparent; }
-.courses-intro {
-  display: flex; align-items: flex-start; justify-content: space-between;
-  gap: 1rem; flex-wrap: wrap; margin-bottom: 2.8rem;
-}
-.courses-intro-text .sec-title { margin-bottom: 0; }
-.courses-note {
-  max-width: 340px;
-  background: rgba(59,130,246,0.07);
-  border: 1px solid rgba(59,130,246,0.2);
-  border-radius: 12px; padding: 12px 16px;
-  font-size: 13px; color: var(--text2); line-height: 1.7;
-}
-.courses-note strong { color: var(--blue-700); }
-/* semester filter */
-.semester-filter {
-  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2rem;
-}
-.filter-btn {
-  padding: 6px 16px; border-radius: 20px;
-  border: 1px solid rgba(59,130,246,0.25);
-  background: rgba(255,255,255,0.7);
-  font-family: var(--sans); font-size: 12px; font-weight: 600;
-  color: var(--muted); cursor: pointer; transition: all 0.2s;
-}
-.filter-btn:hover, .filter-btn.active {
-  background: var(--blue-100); border-color: rgba(59,130,246,0.5); color: var(--blue-700);
-}
-/* course cards grid */
-.courses-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-  gap: 1.25rem;
-}
-/* course card */
-.course-card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 18px;
-  overflow: hidden;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 2px 16px rgba(59,130,246,0.07);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-.course-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 36px rgba(59,130,246,0.14);
-}
-.course-card-header {
-  padding: 1.25rem 1.5rem 1rem;
-  display: flex; align-items: flex-start; gap: 12px;
-  position: relative;
-}
-.course-color-bar {
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  border-radius: 18px 18px 0 0;
-  transition: height 0.3s;
-}
-.course-card:hover .course-color-bar { height: 4px; }
-.course-emoji {
-  width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px; margin-top: 2px;
-}
-.course-info { flex: 1; min-width: 0; }
-.course-code {
-  font-family: var(--mono); font-size: 11px; font-weight: 500;
-  color: var(--muted); margin-bottom: 3px; letter-spacing: 0.05em;
-}
-.course-name {
-  font-size: 15px; font-weight: 700; color: var(--text);
-  line-height: 1.35; margin-bottom: 4px;
-}
-.course-semester {
-  display: inline-flex; align-items: center; gap: 4px;
-  font-size: 11px; font-weight: 600; padding: 2px 9px;
-  border-radius: 8px; letter-spacing: 0.03em;
-}
-.course-desc {
-  padding: 0 1.5rem 1rem;
-  font-size: 13px; color: var(--muted); line-height: 1.7;
-}
-.course-links-wrap {
-  padding: 0 1.25rem 1.25rem;
-  display: flex; flex-direction: column; gap: 8px;
-  max-height: 0; overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.3s ease;
-}
-.course-card.open .course-links-wrap {
-  max-height: 400px;
-}
-.course-divider {
-  height: 1px; background: rgba(99,163,255,0.18);
-  margin: 0 1.5rem 0.75rem;
-  opacity: 0; transition: opacity 0.3s;
-}
-.course-card.open .course-divider { opacity: 1; }
-.course-link-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 9px 14px; border-radius: 10px;
-  background: rgba(255,255,255,0.75);
-  border: 1px solid rgba(99,163,255,0.2);
-  text-decoration: none; color: var(--text2);
-  font-size: 13px; font-weight: 600;
-  transition: all 0.2s;
-}
-.course-link-item:hover {
-  background: var(--blue-100);
-  border-color: rgba(59,130,246,0.4);
-  color: var(--blue-700); transform: translateX(3px);
-}
-.course-link-icon { font-size: 16px; flex-shrink: 0; }
-.course-link-label { flex: 1; }
-.course-link-arrow {
-  font-size: 14px; color: var(--muted);
-  transition: transform 0.2s;
-}
-.course-link-item:hover .course-link-arrow { transform: translateX(3px); color: var(--blue-500); }
-/* toggle indicator */
-.course-toggle {
-  padding: 0.6rem 1.5rem;
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-  font-size: 12px; font-weight: 700; color: var(--blue-500);
-  border-top: 1px solid rgba(99,163,255,0.12);
-  transition: background 0.2s;
-}
-.course-toggle-icon {
-  width: 18px; height: 18px; border-radius: 50%;
-  background: var(--blue-100); display: flex; align-items: center; justify-content: center;
-  font-size: 10px; transition: transform 0.3s;
-}
-.course-card.open .course-toggle-icon { transform: rotate(180deg); }
-.course-card:hover .course-toggle { background: rgba(219,234,254,0.4); }
+.bg-grid{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background-image:
+  linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
 
-/* ===================== ABOUT ===================== */
-#about { background: transparent; }
-.about-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 2.5rem; align-items: start;
+  background-size:50px 50px;
 }
-.about-card {
-  background: var(--card); border: 1px solid var(--card-border);
-  border-radius: 20px; padding: 2rem;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 4px 24px rgba(59,130,246,0.08);
-}
-.about-card p { color: var(--text2); line-height: 1.9; margin-bottom: 1rem; font-size: 0.93rem; }
-.about-card p strong { color: var(--blue-700); }
-.info-rows { display: flex; flex-direction: column; gap: 10px; margin-top: 1.5rem; }
-.info-row {
-  display: flex; align-items: center; gap: 10px;
-  padding: 9px 14px; border-radius: 10px;
-  background: var(--blue-50);
-  border: 1px solid var(--blue-100);
-  font-size: 13px; font-weight: 500; color: var(--text2);
-}
-.info-row a { color: var(--blue-600); text-decoration: none; transition: color 0.2s; }
-.info-row a:hover { color: var(--blue-800); text-decoration: underline; }
-.skills-card {
-  background: var(--card); border: 1px solid var(--card-border);
-  border-radius: 20px; padding: 2rem;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 4px 24px rgba(59,130,246,0.08);
-}
-.sk-group { margin-bottom: 1.5rem; }
-.sk-group:last-child { margin-bottom: 0; }
-.sk-group-title {
-  font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
-}
-.sk-pills { display: flex; flex-wrap: wrap; gap: 7px; }
-.sk-pill {
-  padding: 5px 14px; border-radius: 20px;
-  font-size: 12px; font-weight: 600;
-  background: var(--blue-50);
-  border: 1px solid var(--blue-100);
-  color: var(--blue-700);
-  transition: all 0.2s;
-}
-.sk-pill:hover { background: var(--blue-100); border-color: var(--blue-300); transform: translateY(-2px); }
 
-/* ===================== CONTACT ===================== */
-#contact { background: transparent; }
-.contact-inner {
-  background: linear-gradient(135deg, rgba(37,99,235,0.08), rgba(14,165,233,0.06));
-  border: 1px solid rgba(59,130,246,0.2);
-  border-radius: 28px; padding: 4rem 2rem;
-  text-align: center; max-width: 620px; margin: 0 auto;
-  backdrop-filter: blur(12px);
+.orb{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(80px);
+  z-index:-1;
+  animation:float 15s ease-in-out infinite;
 }
-.contact-inner h2 {
-  font-size: clamp(2rem,5vw,3.2rem); font-weight: 900; letter-spacing: -0.03em;
-  background: linear-gradient(135deg,#1d4ed8,#0ea5e9);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-  margin-bottom: 0.75rem;
-}
-.contact-inner p { color: var(--text2); margin-bottom: 2rem; line-height: 1.8; }
-.contact-email-link {
-  display: inline-block; font-family: var(--mono); font-size: 1.05rem;
-  color: var(--blue-600); text-decoration: none;
-  background: rgba(59,130,246,0.07); border: 1px solid rgba(59,130,246,0.2);
-  border-radius: 12px; padding: 11px 24px; margin-bottom: 2rem;
-  transition: all 0.2s;
-}
-.contact-email-link:hover { background: var(--blue-100); border-color: var(--blue-500); transform: translateY(-2px); }
-.social-row { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
-.soc-link {
-  display: flex; align-items: center; gap: 8px;
-  padding: 10px 20px; border-radius: 12px;
-  background: rgba(255,255,255,0.8); border: 1px solid rgba(59,130,246,0.2);
-  color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 600;
-  backdrop-filter: blur(8px); transition: all 0.22s;
-}
-.soc-link:hover { background: var(--blue-100); border-color: var(--blue-500); color: var(--blue-700); transform: translateY(-3px); }
 
-/* ===================== FOOTER ===================== */
-footer {
-  position: relative; z-index: 1;
-  padding: 1.5rem 2rem; text-align: center;
-  border-top: 1px solid rgba(59,130,246,0.12);
-  background: rgba(255,255,255,0.4);
-  font-size: 13px; color: var(--muted);
+.orb1{
+  width:420px;
+  height:420px;
+  background:rgba(56,189,248,0.18);
+  top:-120px;
+  left:-100px;
 }
-footer a { color: var(--blue-500); text-decoration: none; }
 
-@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+.orb2{
+  width:340px;
+  height:340px;
+  background:rgba(99,102,241,0.15);
+  right:-100px;
+  top:20%;
+}
 
-/* ===================== RESPONSIVE ===================== */
+.orb3{
+  width:300px;
+  height:300px;
+  background:rgba(37,99,235,0.15);
+  bottom:-100px;
+  left:30%;
+}
+
+@keyframes float{
+  0%,100%{
+    transform:translateY(0px);
+  }
+  50%{
+    transform:translateY(-30px);
+  }
+}
+
+/* ===== NAV ===== */
+
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  height:72px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 40px;
+
+  background:rgba(255,255,255,0.6);
+  backdrop-filter:blur(18px);
+
+  border-bottom:1px solid rgba(255,255,255,0.4);
+
+  z-index:999;
+}
+
+.logo{
+  font-size:20px;
+  font-weight:800;
+
+  background:linear-gradient(135deg,var(--blue),var(--sky));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.nav-links{
+  display:flex;
+  gap:12px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:var(--muted);
+
+  padding:10px 18px;
+  border-radius:14px;
+
+  transition:0.3s;
+  font-weight:600;
+}
+
+.nav-links a:hover{
+  background:white;
+  color:var(--blue);
+}
+
+.study-btn{
+  background:linear-gradient(135deg,var(--blue),var(--sky));
+  color:white !important;
+  box-shadow:0 8px 24px rgba(37,99,235,0.25);
+}
+
+/* ===== HERO ===== */
+
+.hero{
+  min-height:100vh;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:120px 24px 80px;
+}
+
+.hero-inner{
+  max-width:1200px;
+  width:100%;
+
+  display:grid;
+  grid-template-columns:1fr 420px;
+  gap:60px;
+  align-items:center;
+}
+
+.hero-left{
+  animation:fadeUp 1s ease;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+
+  padding:10px 18px;
+  border-radius:999px;
+
+  background:rgba(255,255,255,0.7);
+  border:1px solid rgba(37,99,235,0.12);
+
+  margin-bottom:24px;
+
+  font-size:14px;
+  font-weight:700;
+
+  color:var(--blue);
+}
+
+.hero h1{
+  font-size:72px;
+  line-height:1;
+  font-weight:900;
+  margin-bottom:18px;
+
+  background:linear-gradient(135deg,#1e3a8a,#2563eb,#0ea5e9);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero-role{
+  font-size:26px;
+  font-weight:700;
+  color:#334155;
+
+  margin-bottom:20px;
+}
+
+.hero-role span{
+  color:var(--sky);
+}
+
+.hero-desc{
+  font-size:18px;
+  line-height:1.9;
+  color:var(--muted);
+
+  max-width:700px;
+  margin-bottom:36px;
+}
+
+.hero-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+
+  padding:14px 26px;
+  border-radius:18px;
+
+  text-decoration:none;
+  font-weight:700;
+
+  transition:0.3s;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,var(--blue),var(--sky));
+  color:white;
+  box-shadow:0 12px 30px rgba(37,99,235,0.25);
+}
+
+.btn-primary:hover{
+  transform:translateY(-4px);
+}
+
+.btn-white{
+  background:white;
+  color:var(--text);
+
+  border:1px solid rgba(37,99,235,0.08);
+}
+
+.btn-white:hover{
+  transform:translateY(-4px);
+}
+
+/* ===== PROFILE CARD ===== */
+
+.profile-card{
+  background:rgba(255,255,255,0.72);
+  backdrop-filter:blur(20px);
+
+  border:1px solid rgba(255,255,255,0.5);
+
+  border-radius:32px;
+
+  padding:32px;
+
+  box-shadow:var(--shadow);
+
+  animation:fadeUp 1s ease;
+}
+
+.avatar{
+  width:140px;
+  height:140px;
+
+  border-radius:50%;
+
+  margin:0 auto 24px;
+
+  background:linear-gradient(135deg,var(--blue),var(--sky));
+
+  padding:5px;
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  object-fit:cover;
+  background:white;
+}
+
+.profile-name{
+  text-align:center;
+  font-size:28px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.profile-user{
+  text-align:center;
+  color:var(--sky);
+  font-weight:600;
+  margin-bottom:24px;
+}
+
+.info-box{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.info-item{
+  background:white;
+  border-radius:16px;
+  padding:14px 16px;
+
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  border:1px solid rgba(37,99,235,0.06);
+}
+
+.info-item span{
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* ===== SECTION ===== */
+
+.section{
+  padding:100px 24px;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+}
+
+.section-title{
+  font-size:48px;
+  font-weight:900;
+  margin-bottom:18px;
+
+  background:linear-gradient(135deg,var(--blue),var(--sky));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.section-desc{
+  color:var(--muted);
+  line-height:1.8;
+  margin-bottom:60px;
+}
+
+/* ===== CARDS ===== */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px;
+}
+
+.card{
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:28px;
+
+  padding:28px;
+
+  backdrop-filter:blur(20px);
+
+  transition:0.35s;
+
+  box-shadow:var(--shadow);
+}
+
+.card:hover{
+  transform:translateY(-8px);
+}
+
+.card-icon{
+  width:64px;
+  height:64px;
+
+  border-radius:18px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:28px;
+
+  margin-bottom:22px;
+
+  background:linear-gradient(135deg,#dbeafe,#e0f2fe);
+}
+
+.card h3{
+  font-size:24px;
+  margin-bottom:12px;
+}
+
+.card p{
+  color:var(--muted);
+  line-height:1.8;
+  margin-bottom:24px;
+}
+
+.card a{
+  text-decoration:none;
+  color:var(--blue);
+  font-weight:700;
+}
+
+/* ===== SOCIALS ===== */
+
+.socials{
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+}
+
+.social{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  padding:16px 24px;
+
+  background:white;
+
+  border-radius:18px;
+
+  text-decoration:none;
+  color:var(--text);
+
+  font-weight:700;
+
+  transition:0.3s;
+}
+
+.social:hover{
+  transform:translateY(-5px);
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+  padding:50px 24px;
+  text-align:center;
+
+  color:var(--muted);
+}
+
+/* ===== ANIM ===== */
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(40px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:980px){
+
+  .hero-inner{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:54px;
+  }
+
+  .profile-card{
+    max-width:500px;
+    margin:auto;
+  }
+
+}
+
 @media(max-width:700px){
-  nav { padding: 0 1rem; }
-  .nav-links { display: none; }
-  .about-grid { grid-template-columns: 1fr; }
-  section:not(#hero) { padding: 3.5rem 1rem; }
-  .gh-strip { flex-wrap: wrap; }
-  .courses-intro { flex-direction: column; }
-  .courses-note { max-width: 100%; }
+
+  nav{
+    padding:0 18px;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  .hero h1{
+    font-size:42px;
+  }
+
+  .section-title{
+    font-size:36px;
+  }
+
 }
 </style>
 </head>
 <body>
 
-<!-- FLOATING ORBS -->
+<div class="bg-grid"></div>
+
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
-<div class="orb orb4"></div>
 
-<!-- PARTICLES CANVAS -->
-<canvas id="bg-canvas"></canvas>
+<!-- NAV -->
 
-<!-- =================== NAV =================== -->
 <nav>
-  <a href="#" class="nav-brand">
-    <div class="nav-dot"></div>
+
+  <div class="logo">
     trg.id.vn
-  </a>
-  <ul class="nav-links">
-    <li><a href="#courses">Môn học</a></li>
-    <li><a href="#about">Về tôi</a></li>
-    <li><a href="#contact">Liên hệ</a></li>
-  </ul>
+  </div>
+
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+
+    <a href="./study-sharing/" class="study-btn">
+      📚 Study Sharing
+    </a>
+  </div>
+
 </nav>
 
-<!-- =================== HERO =================== -->
-<section id="hero">
+<!-- HERO -->
+
+<section class="hero">
+
   <div class="hero-inner">
-    <div class="avatar-wrap">
-      <div class="avatar-ring-outer"></div>
-      <div class="avatar-ring-inner"></div>
-      <div class="avatar-img" id="hero-avatar">🎓</div>
-      <div class="avatar-badge">💻</div>
+
+    <!-- LEFT -->
+
+    <div class="hero-left">
+
+      <div class="badge">
+        🚀 Building impactful digital products
+      </div>
+
+      <h1>
+        Trần<br>
+        Trường Giang
+      </h1>
+
+      <div class="hero-role">
+        💻 Software Engineer ·
+        <span>AI & Machine Learning Enthusiast</span>
+      </div>
+
+      <p class="hero-desc">
+        Passionate about web development, cloud computing,
+        artificial intelligence and building modern digital experiences.
+        <br><br>
+
+        Hiện mình đang phát triển các dự án cá nhân về:
+        Study Sharing Platform, AI Applications,
+        Web Systems và Healthcare Technology.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="./study-sharing/" class="btn btn-primary">
+          📚 Open Study Sharing
+        </a>
+
+        <a href="https://github.com/Giangvp689"
+           target="_blank"
+           class="btn btn-white">
+           💻 GitHub
+        </a>
+
+        <a href="#contact"
+           class="btn btn-white">
+           ✉️ Contact
+        </a>
+
+      </div>
+
     </div>
 
-    <div class="hero-tag">👨‍🎓 Sinh viên · Developer</div>
-    <h1 class="hero-name" id="hero-name">Trần Trường Giang</h1>
-    <div class="hero-typing"><span id="typing-text"></span><span class="cursor"></span></div>
-    <p class="hero-desc" id="hero-desc">Trang web chia sẻ tài liệu học tập và liên kết môn học.<br>Truy cập <strong>trg.id.vn</strong> để lấy link học nhé các bạn!</p>
+    <!-- RIGHT -->
 
-    <div class="gh-strip" id="gh-strip">
-      <div class="gh-strip-item"><span class="gh-num" id="stat-repos">…</span><span class="gh-lbl">Repos</span></div>
-      <div class="gh-strip-item"><span class="gh-num" id="stat-followers">…</span><span class="gh-lbl">Followers</span></div>
-      <div class="gh-strip-item"><span class="gh-num" id="stat-following">…</span><span class="gh-lbl">Following</span></div>
+    <div class="profile-card">
+
+      <div class="avatar">
+        <img src="https://avatars.githubusercontent.com/u/108120903?v=4">
+      </div>
+
+      <div class="profile-name">
+        Trần Trường Giang
+      </div>
+
+      <div class="profile-user">
+        Giangvp689 · he/him
+      </div>
+
+      <div class="info-box">
+
+        <div class="info-item">
+          🌍
+          <span>Vietnam 🇻🇳</span>
+        </div>
+
+        <div class="info-item">
+          💼
+          <span>Freelance Software Engineer</span>
+        </div>
+
+        <div class="info-item">
+          👥
+          <span>22 followers · 1 following</span>
+        </div>
+
+        <div class="info-item">
+          📧
+          <span>Giangvp689@gmail.com</span>
+        </div>
+
+        <div class="info-item">
+          📱
+          <span>0377446300</span>
+        </div>
+
+      </div>
+
     </div>
 
-    <div class="hero-btns">
-      <a href="https://github.com/Giangvp689" target="_blank" class="btn btn-blue">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-        GitHub
+  </div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section class="section" id="about">
+
+  <div class="container">
+
+    <h2 class="section-title">
+      About Me
+    </h2>
+
+    <p class="section-desc">
+      Mình là sinh viên Công nghệ thông tin đam mê phát triển sản phẩm số,
+      lập trình web, AI và xây dựng các hệ thống hữu ích cho sinh viên.
+      <br><br>
+
+      Mục tiêu của mình là tạo ra các sản phẩm thực tế,
+      hiện đại và có thể phục vụ cộng đồng.
+    </p>
+
+    <div class="cards">
+
+      <div class="card">
+
+        <div class="card-icon">
+          🤖
+        </div>
+
+        <h3>Artificial Intelligence</h3>
+
+        <p>
+          Nghiên cứu Machine Learning, Deep Learning,
+          AI Applications và các hệ thống thông minh.
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-icon">
+          ☁️
+        </div>
+
+        <h3>Cloud Computing</h3>
+
+        <p>
+          Tìm hiểu kiến trúc cloud,
+          scalable systems và deployment hiện đại.
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-icon">
+          🌐
+        </div>
+
+        <h3>Modern Web Development</h3>
+
+        <p>
+          Xây dựng giao diện web hiện đại,
+          animation đẹp và trải nghiệm người dùng chuyên nghiệp.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- PROJECTS -->
+
+<section class="section" id="projects">
+
+  <div class="container">
+
+    <h2 class="section-title">
+      Featured Projects
+    </h2>
+
+    <p class="section-desc">
+      Một vài dự án nổi bật mình đang phát triển.
+    </p>
+
+    <div class="cards">
+
+      <div class="card">
+
+        <div class="card-icon">
+          📚
+        </div>
+
+        <h3>Study Sharing System</h3>
+
+        <p>
+          Nền tảng chia sẻ tài liệu học tập dành cho sinh viên,
+          tích hợp giao diện hiện đại và quản lý môn học trực quan.
+        </p>
+
+        <a href="./study-sharing/">
+          Open Project →
+        </a>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-icon">
+          🚀
+        </div>
+
+        <h3>Personal Portfolio</h3>
+
+        <p>
+          Website cá nhân với phong cách hiện đại,
+          animation động và thiết kế gradient glassmorphism.
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-icon">
+          🧠
+        </div>
+
+        <h3>AI Applications</h3>
+
+        <p>
+          Các thử nghiệm và ứng dụng AI,
+          Machine Learning và chatbot systems.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section class="section" id="contact">
+
+  <div class="container">
+
+    <h2 class="section-title">
+      Let's Connect
+    </h2>
+
+    <p class="section-desc">
+      Kết nối với mình qua các nền tảng bên dưới nhé 🚀
+    </p>
+
+    <div class="socials">
+
+      <a href="https://github.com/Giangvp689"
+         target="_blank"
+         class="social">
+         💻 GitHub
       </a>
-      <a href="./study-sharing/" class="btn btn-white">
-  📚 Study Sharing
-</a>
+
+      <a href="https://www.facebook.com/giag.tran.3133"
+         target="_blank"
+         class="social">
+         📘 Facebook
+      </a>
+
+      <a href="mailto:Giangvp689@gmail.com"
+         class="social">
+         📧 Gmail
+      </a>
+
+      <a href="https://linkedin.com/in/giang-tr%E1%BA%A7n-b641622b9"
+         target="_blank"
+         class="social">
+         💼 LinkedIn
+      </a>
+
+      <a href="tel:0377446300"
+         class="social">
+         📱 0377446300
+      </a>
+
     </div>
-  </div>
-  <div class="scroll-hint">
-    <span>Cuộn xuống</span>
-    <div class="scroll-arrow">↓</div>
-  </div>
-</section>
 
-<!-- =================== COURSES =================== -->
-<section id="courses">
-  <div class="container">
-    <div class="courses-intro reveal">
-      <div class="courses-intro-text">
-        <p class="sec-eyebrow">// Tài liệu học tập</p>
-        <h2 class="sec-title">Môn học & Links</h2>
-        <div class="sec-rule"></div>
-      </div>
-      <div class="courses-note">
-        💡 <strong>Hướng dẫn:</strong> Click vào từng môn học để xem đường dẫn tài liệu, bài giảng và các link hữu ích mà Giang đã tổng hợp.
-      </div>
-    </div>
-
-    <!-- SEMESTER FILTER - tự động tạo từ data -->
-    <div class="semester-filter reveal" id="semester-filter"></div>
-
-    <!-- COURSES GRID - tự động render từ COURSES_DATA -->
-    <div class="courses-grid reveal" id="courses-grid"></div>
   </div>
-</section>
 
-<!-- =================== ABOUT =================== -->
-<section id="about">
-  <div class="container">
-    <p class="sec-eyebrow reveal">// Giới thiệu</p>
-    <h2 class="sec-title reveal">Về tôi</h2>
-    <div class="sec-rule reveal"></div>
-    <div class="about-grid">
-      <div class="about-card reveal">
-        <p>Xin chào! Mình là <strong>Trần Trường Giang</strong>, sinh viên ngành <strong>Công nghệ thông tin</strong>.</p>
-        <p>Mình tạo trang này để chia sẻ link tài liệu môn học với các bạn trong lớp. Thay vì share link mỗi lần, mọi người cứ vào <strong>trg.id.vn</strong> là có hết!</p>
-        <p id="about-bio">Mình cũng thích lập trình, xây dựng web và khám phá công nghệ mới.</p>
-        <div class="info-rows">
-          <div class="info-row">📍 <span id="info-loc">Bắc Ninh, Việt Nam</span></div>
-          <div class="info-row">🐱 <a href="https://github.com/Giangvp689" target="_blank">github.com/Giangvp689</a></div>
-          <div class="info-row">📧 <a href="mailto:giangvp689@gmail.com">giangvp689@gmail.com</a></div>
-          <div class="info-row">🌐 <a href="https://trg.id.vn">trg.id.vn</a></div>
-        </div>
-      </div>
-      <div class="skills-card reveal reveal-delay-1">
-        <div class="sk-group">
-          <div class="sk-group-title">💻 Lập trình</div>
-          <div class="sk-pills" id="sk-detected">
-            <span class="sk-pill">JavaScript</span>
-            <span class="sk-pill">Python</span>
-            <span class="sk-pill">HTML/CSS</span>
-          </div>
-        </div>
-        <div class="sk-group">
-          <div class="sk-group-title">🗺️ Chuyên ngành</div>
-          <div class="sk-pills">
-            <span class="sk-pill">GIS / Địa lý</span>
-            <span class="sk-pill">CSDL</span>
-            <span class="sk-pill">Mạng máy tính</span>
-            <span class="sk-pill">Hệ thống TT</span>
-          </div>
-        </div>
-        <div class="sk-group">
-          <div class="sk-group-title">🛠️ Tools</div>
-          <div class="sk-pills">
-            <span class="sk-pill">Git & GitHub</span>
-            <span class="sk-pill">VS Code</span>
-            <span class="sk-pill">Linux</span>
-            <span class="sk-pill">ArcGIS</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =================== CONTACT =================== -->
-<section id="contact">
-  <div class="container reveal">
-    <div class="contact-inner">
-      <p class="sec-eyebrow" style="text-align:center;margin-bottom:0.5rem">// Kết nối</p>
-      <h2>Liên hệ Giang!</h2>
-      <p>Có câu hỏi về tài liệu hay muốn hợp tác? Cứ nhắn mình nhé!</p>
-      <div><a href="mailto:giangvp689@gmail.com" class="contact-email-link">giangvp689@gmail.com</a></div>
-      <div class="social-row">
-        <a href="https://github.com/Giangvp689" target="_blank" class="soc-link">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-          GitHub
-        </a>
-        <a href="https://trg.id.vn" class="soc-link">
-          🌐 trg.id.vn
-        </a>
-      </div>
-    </div>
-  </div>
 </section>
 
 <footer>
-  <p>© 2025 Trần Trường Giang &nbsp;·&nbsp; <a href="https://github.com/Giangvp689" target="_blank">@Giangvp689</a> &nbsp;·&nbsp; <a href="https://trg.id.vn">trg.id.vn</a></p>
+  © 2025 Trần Trường Giang · trg.id.vn
 </footer>
 
-<script>
-/* ============================================================
-   ⚙️  DỮ LIỆU MÔN HỌC — CHỈNH SỬA Ở ĐÂY!
-   
-   Để thêm môn mới: copy một object {} và thêm vào mảng bên dưới
-   Để thêm link mới: copy một object trong "links" và điền vào
-   
-   Các trường:
-   - name: tên môn học
-   - code: mã môn (tùy chọn)
-   - emoji: biểu tượng
-   - color: màu gradient (hex)
-   - semester: học kỳ (dùng để lọc)
-   - desc: mô tả ngắn
-   - links: mảng các đường dẫn
-       { label: "tên hiển thị", url: "https://...", icon: "emoji" }
-============================================================ */
-const COURSES_DATA = [
-  {
-    name: "Hệ thống thông tin địa lý",
-    code: "GIS301",
-    emoji: "🗺️",
-    color: "#3b82f6,#0ea5e9",
-    semester: "HK2 2024-2025",
-    desc: "Học về hệ thống thông tin địa lý, phân tích không gian và bản đồ số.",
-    links: [
-      { label: "Tài liệu GIS chính", url: "https://gis.vn", icon: "📖" },
-      { label: "Phần mềm ArcGIS Online", url: "https://www.arcgis.com", icon: "🌍" },
-      { label: "Bài giảng của cô", url: "#", icon: "📂" },
-      { label: "Hướng dẫn thực hành", url: "#", icon: "💻" }
-    ]
-  },
-  {
-    name: "Cơ sở dữ liệu",
-    code: "DB201",
-    emoji: "🗄️",
-    color: "#6366f1,#8b5cf6",
-    semester: "HK2 2024-2025",
-    desc: "Thiết kế và quản lý cơ sở dữ liệu quan hệ, SQL, tối ưu truy vấn.",
-    links: [
-      { label: "Slide bài giảng", url: "#", icon: "📊" },
-      { label: "Bài tập SQL", url: "#", icon: "📝" },
-      { label: "SQLZoo — luyện SQL online", url: "https://sqlzoo.net", icon: "🏋️" }
-    ]
-  },
-  {
-    name: "Lập trình Web",
-    code: "WEB302",
-    emoji: "🌐",
-    color: "#f59e0b,#f97316",
-    semester: "HK2 2024-2025",
-    desc: "HTML, CSS, JavaScript, xây dựng ứng dụng web cơ bản và nâng cao.",
-    links: [
-      { label: "Tài liệu khóa học", url: "#", icon: "📖" },
-      { label: "MDN Web Docs", url: "https://developer.mozilla.org/vi", icon: "🔍" },
-      { label: "Bài tập thực hành", url: "#", icon: "💻" }
-    ]
-  },
-  {
-    name: "Mạng máy tính",
-    code: "NET201",
-    emoji: "🔌",
-    color: "#10b981,#06b6d4",
-    semester: "HK1 2024-2025",
-    desc: "Giao thức mạng, mô hình OSI/TCP-IP, bảo mật và quản trị mạng.",
-    links: [
-      { label: "Slide bài giảng", url: "#", icon: "📊" },
-      { label: "Packet Tracer Labs", url: "#", icon: "🖧" },
-      { label: "Đề thi tham khảo", url: "#", icon: "📄" }
-    ]
-  },
-  {
-    name: "Trí tuệ nhân tạo",
-    code: "AI401",
-    emoji: "🤖",
-    color: "#ec4899,#a855f7",
-    semester: "HK2 2024-2025",
-    desc: "Machine Learning, Deep Learning, xử lý ngôn ngữ tự nhiên và ứng dụng AI.",
-    links: [
-      { label: "Tài liệu môn học", url: "#", icon: "📖" },
-      { label: "Google Colab — thực hành", url: "https://colab.research.google.com", icon: "☁️" },
-      { label: "Kaggle — dataset & notebook", url: "https://www.kaggle.com", icon: "📊" }
-    ]
-  },
-  {
-    name: "Hệ điều hành",
-    code: "OS301",
-    emoji: "⚙️",
-    color: "#64748b,#475569",
-    semester: "HK1 2024-2025",
-    desc: "Quản lý tiến trình, bộ nhớ, hệ thống file và lập lịch CPU.",
-    links: [
-      { label: "Slide bài giảng", url: "#", icon: "📊" },
-      { label: "Bài tập thực hành Linux", url: "#", icon: "🐧" }
-    ]
-  }
-];
-/* ============================================================ */
-
-/* ---------- RENDER COURSES ---------- */
-function renderCourses(filter = 'all') {
-  const grid = document.getElementById('courses-grid');
-  grid.innerHTML = '';
-  const filtered = filter === 'all' ? COURSES_DATA : COURSES_DATA.filter(c => c.semester === filter);
-  filtered.forEach((course, i) => {
-    const [c1, c2] = course.color.split(',');
-    const semColor = getSemColor(course.semester);
-    const card = document.createElement('div');
-    card.className = 'course-card';
-    card.style.animationDelay = `${i * 0.07}s`;
-    card.innerHTML = `
-      <div class="course-color-bar" style="background:linear-gradient(90deg,${c1},${c2})"></div>
-      <div class="course-card-header">
-        <div class="course-emoji" style="background:linear-gradient(135deg,${c1}18,${c2}22)">${course.emoji}</div>
-        <div class="course-info">
-          <div class="course-code">${course.code || ''}</div>
-          <div class="course-name">${course.name}</div>
-          <span class="course-semester" style="background:${semColor.bg};color:${semColor.text}">📅 ${course.semester}</span>
-        </div>
-      </div>
-      ${course.desc ? `<div class="course-desc">${course.desc}</div>` : ''}
-      <div class="course-divider"></div>
-      <div class="course-links-wrap">
-        ${course.links.map(l => `
-          <a href="${l.url}" target="_blank" class="course-link-item">
-            <span class="course-link-icon">${l.icon}</span>
-            <span class="course-link-label">${l.label}</span>
-            <span class="course-link-arrow">→</span>
-          </a>`).join('')}
-      </div>
-      <div class="course-toggle">
-        <div class="course-toggle-icon">▼</div>
-        <span class="toggle-label">${course.links.length} đường dẫn</span>
-      </div>`;
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('.course-link-item')) return;
-      card.classList.toggle('open');
-      card.querySelector('.toggle-label').textContent =
-        card.classList.contains('open') ? 'Ẩn bớt' : `${course.links.length} đường dẫn`;
-    });
-    grid.appendChild(card);
-  });
-}
-
-/* ---------- RENDER FILTER BUTTONS ---------- */
-function renderFilter() {
-  const semesters = ['all', ...new Set(COURSES_DATA.map(c => c.semester))];
-  const wrap = document.getElementById('semester-filter');
-  semesters.forEach(s => {
-    const btn = document.createElement('button');
-    btn.className = 'filter-btn' + (s === 'all' ? ' active' : '');
-    btn.textContent = s === 'all' ? '🗂️ Tất cả' : s;
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderCourses(s);
-    });
-    wrap.appendChild(btn);
-  });
-}
-
-function getSemColor(sem) {
-  if (sem.includes('HK2')) return { bg: '#dbeafe', text: '#1d4ed8' };
-  if (sem.includes('HK1')) return { bg: '#dcfce7', text: '#166534' };
-  return { bg: '#f1f5f9', text: '#475569' };
-}
-
-/* ---------- TYPING EFFECT ---------- */
-const phrases = [
-  'Full-Stack Developer 🚀',
-  'Sinh viên CNTT 🎓',
-  'GIS Enthusiast 🗺️',
-  'Chia sẻ tài liệu học tập 📚',
-  '@Giangvp689 on GitHub'
-];
-let pi = 0, ci = 0, del = false;
-function typeLoop() {
-  const el = document.getElementById('typing-text');
-  if (!el) return;
-  const phrase = phrases[pi];
-  if (!del) {
-    el.textContent = phrase.slice(0, ++ci);
-    if (ci === phrase.length) { del = true; setTimeout(typeLoop, 1800); return; }
-  } else {
-    el.textContent = phrase.slice(0, --ci);
-    if (ci === 0) { del = false; pi = (pi + 1) % phrases.length; }
-  }
-  setTimeout(typeLoop, del ? 45 : 75);
-}
-
-/* ---------- GITHUB API ---------- */
-async function loadGH() {
-  try {
-    const u = await fetch('https://api.github.com/users/Giangvp689').then(r => r.json());
-    if (u.avatar_url) {
-      document.getElementById('hero-avatar').innerHTML = `<img src="${u.avatar_url}" alt="${u.name}">`;
-    }
-    if (u.name) document.getElementById('hero-name').textContent = u.name;
-    if (u.bio) document.getElementById('about-bio').textContent = u.bio;
-    if (u.location) document.getElementById('info-loc').textContent = u.location;
-    document.getElementById('stat-repos').textContent = u.public_repos ?? '—';
-    document.getElementById('stat-followers').textContent = u.followers ?? '—';
-    document.getElementById('stat-following').textContent = u.following ?? '—';
-
-    const repos = await fetch('https://api.github.com/users/Giangvp689/repos?per_page=50').then(r => r.json());
-    if (Array.isArray(repos)) {
-      const langs = {};
-      repos.filter(r => !r.fork && r.language).forEach(r => { langs[r.language] = (langs[r.language] || 0) + 1; });
-      const top = Object.entries(langs).sort((a,b)=>b[1]-a[1]).slice(0,8);
-      if (top.length) {
-        const wrap = document.getElementById('sk-detected');
-        wrap.innerHTML = top.map(([l]) => `<span class="sk-pill">${l}</span>`).join('');
-      }
-    }
-  } catch(e) { console.log(e); }
-}
-
-/* ---------- PARTICLES ---------- */
-(function() {
-  const canvas = document.getElementById('bg-canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, pts;
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-    init();
-  }
-  function init() {
-    pts = Array.from({length: 55}, () => ({
-      x: Math.random() * W, y: Math.random() * H,
-      vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
-      r: Math.random() * 2 + 1,
-      a: Math.random()
-    }));
-  }
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    pts.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0 || p.x > W) p.vx *= -1;
-      if (p.y < 0 || p.y > H) p.vy *= -1;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(96,165,250,${p.a * 0.35})`;
-      ctx.fill();
-    });
-    // draw connecting lines
-    for (let i = 0; i < pts.length; i++) {
-      for (let j = i + 1; j < pts.length; j++) {
-        const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < 120) {
-          ctx.beginPath();
-          ctx.moveTo(pts[i].x, pts[i].y);
-          ctx.lineTo(pts[j].x, pts[j].y);
-          ctx.strokeStyle = `rgba(96,165,250,${(1 - dist/120) * 0.12})`;
-          ctx.lineWidth = 1;
-          ctx.stroke();
-        }
-      }
-    }
-    requestAnimationFrame(draw);
-  }
-  window.addEventListener('resize', resize);
-  resize(); draw();
-})();
-
-/* ---------- SCROLL REVEAL ---------- */
-const ro = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
-
-/* ---------- ACTIVE NAV ---------- */
-const secs = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-links a');
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+e.target.id));
-    }
-  });
-}, { rootMargin: '-40% 0px -55% 0px' });
-secs.forEach(s => io.observe(s));
-
-/* ---------- INIT ---------- */
-renderFilter();
-renderCourses();
-typeLoop();
-loadGH();
-</script>
 </body>
 </html>
+```
