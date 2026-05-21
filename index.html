@@ -1,15 +1,18 @@
-```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 <title>Trần Trường Giang · Software Engineer</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
+
 *{
   margin:0;
   padding:0;
@@ -17,9 +20,12 @@
 }
 
 :root{
+
   --bg:#eef6ff;
+
   --card:rgba(255,255,255,0.72);
-  --border:rgba(120,160,255,0.18);
+
+  --border:rgba(255,255,255,0.35);
 
   --blue:#2563eb;
   --sky:#0ea5e9;
@@ -29,7 +35,9 @@
   --text:#0f172a;
   --muted:#64748b;
 
-  --shadow:0 10px 40px rgba(37,99,235,0.12);
+  --shadow:
+  0 10px 40px rgba(37,99,235,0.12);
+
 }
 
 html{
@@ -49,6 +57,7 @@ body{
   position:fixed;
   inset:0;
   z-index:-2;
+
   background-image:
   linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
   linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
@@ -59,51 +68,55 @@ body{
 .orb{
   position:fixed;
   border-radius:50%;
-  filter:blur(80px);
+  filter:blur(90px);
   z-index:-1;
-  animation:float 15s ease-in-out infinite;
+  animation:float 14s ease-in-out infinite;
 }
 
 .orb1{
   width:420px;
   height:420px;
-  background:rgba(56,189,248,0.18);
-  top:-120px;
+  background:rgba(56,189,248,0.16);
+  top:-100px;
   left:-100px;
 }
 
 .orb2{
   width:340px;
   height:340px;
-  background:rgba(99,102,241,0.15);
+  background:rgba(99,102,241,0.14);
   right:-100px;
-  top:20%;
+  top:18%;
 }
 
 .orb3{
   width:300px;
   height:300px;
-  background:rgba(37,99,235,0.15);
-  bottom:-100px;
+  background:rgba(37,99,235,0.14);
+  bottom:-120px;
   left:30%;
 }
 
 @keyframes float{
+
   0%,100%{
     transform:translateY(0px);
   }
+
   50%{
     transform:translateY(-30px);
   }
+
 }
 
 /* ===== NAV ===== */
 
 nav{
+
   position:fixed;
   top:0;
   width:100%;
-  height:72px;
+  height:76px;
 
   display:flex;
   align-items:center;
@@ -111,17 +124,18 @@ nav{
 
   padding:0 40px;
 
-  background:rgba(255,255,255,0.6);
-  backdrop-filter:blur(18px);
+  background:rgba(255,255,255,0.65);
+  backdrop-filter:blur(20px);
 
-  border-bottom:1px solid rgba(255,255,255,0.4);
+  border-bottom:1px solid rgba(255,255,255,0.5);
 
   z-index:999;
 }
 
 .logo{
-  font-size:20px;
-  font-weight:800;
+
+  font-size:22px;
+  font-weight:900;
 
   background:linear-gradient(135deg,var(--blue),var(--sky));
   -webkit-background-clip:text;
@@ -129,94 +143,108 @@ nav{
 }
 
 .nav-links{
+
   display:flex;
+  align-items:center;
   gap:12px;
 }
 
 .nav-links a{
+
   text-decoration:none;
   color:var(--muted);
 
-  padding:10px 18px;
-  border-radius:14px;
+  padding:12px 18px;
+  border-radius:16px;
 
   transition:0.3s;
   font-weight:600;
 }
 
 .nav-links a:hover{
+
   background:white;
   color:var(--blue);
 }
 
-.study-btn{
+.nav-btn{
+
   background:linear-gradient(135deg,var(--blue),var(--sky));
   color:white !important;
-  box-shadow:0 8px 24px rgba(37,99,235,0.25);
+
+  box-shadow:0 10px 24px rgba(37,99,235,0.22);
 }
 
 /* ===== HERO ===== */
 
 .hero{
+
   min-height:100vh;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  padding:120px 24px 80px;
+  padding:140px 24px 80px;
 }
 
 .hero-inner{
-  max-width:1200px;
+
+  max-width:1280px;
   width:100%;
 
   display:grid;
-  grid-template-columns:1fr 420px;
+  grid-template-columns:1.1fr 430px;
+
   gap:60px;
   align-items:center;
 }
 
-.hero-left{
-  animation:fadeUp 1s ease;
-}
-
 .badge{
+
   display:inline-flex;
   align-items:center;
   gap:10px;
 
-  padding:10px 18px;
+  padding:12px 20px;
+
   border-radius:999px;
 
   background:rgba(255,255,255,0.7);
+
   border:1px solid rgba(37,99,235,0.12);
 
-  margin-bottom:24px;
+  margin-bottom:28px;
+
+  color:var(--blue);
 
   font-size:14px;
   font-weight:700;
-
-  color:var(--blue);
 }
 
 .hero h1{
-  font-size:72px;
-  line-height:1;
+
+  font-size:84px;
+  line-height:0.95;
+
   font-weight:900;
-  margin-bottom:18px;
+
+  margin-bottom:24px;
 
   background:linear-gradient(135deg,#1e3a8a,#2563eb,#0ea5e9);
+
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
 .hero-role{
-  font-size:26px;
+
+  font-size:28px;
   font-weight:700;
+
   color:#334155;
 
-  margin-bottom:20px;
+  margin-bottom:24px;
 }
 
 .hero-role span{
@@ -224,26 +252,34 @@ nav{
 }
 
 .hero-desc{
+
+  max-width:760px;
+
   font-size:18px;
-  line-height:1.9;
+  line-height:1.95;
+
   color:var(--muted);
 
-  max-width:700px;
-  margin-bottom:36px;
+  margin-bottom:40px;
 }
 
 .hero-buttons{
+
   display:flex;
   flex-wrap:wrap;
   gap:16px;
+
+  margin-bottom:42px;
 }
 
 .btn{
+
   display:inline-flex;
   align-items:center;
   gap:10px;
 
-  padding:14px 26px;
+  padding:16px 28px;
+
   border-radius:18px;
 
   text-decoration:none;
@@ -253,9 +289,13 @@ nav{
 }
 
 .btn-primary{
+
   background:linear-gradient(135deg,var(--blue),var(--sky));
+
   color:white;
-  box-shadow:0 12px 30px rgba(37,99,235,0.25);
+
+  box-shadow:
+  0 14px 32px rgba(37,99,235,0.25);
 }
 
 .btn-primary:hover{
@@ -263,6 +303,7 @@ nav{
 }
 
 .btn-white{
+
   background:white;
   color:var(--text);
 
@@ -273,72 +314,134 @@ nav{
   transform:translateY(-4px);
 }
 
-/* ===== PROFILE CARD ===== */
+/* ===== STATS ===== */
 
-.profile-card{
-  background:rgba(255,255,255,0.72);
-  backdrop-filter:blur(20px);
+.hero-stats{
 
-  border:1px solid rgba(255,255,255,0.5);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
 
-  border-radius:32px;
+  gap:18px;
+}
 
-  padding:32px;
+.stat{
+
+  background:rgba(255,255,255,0.68);
+
+  border:1px solid var(--border);
+
+  backdrop-filter:blur(18px);
+
+  padding:24px;
+
+  border-radius:24px;
 
   box-shadow:var(--shadow);
+}
 
-  animation:fadeUp 1s ease;
+.stat h3{
+
+  font-size:34px;
+  color:var(--blue);
+
+  margin-bottom:8px;
+}
+
+.stat p{
+  color:var(--muted);
+}
+
+/* ===== PROFILE ===== */
+
+.profile-card{
+
+  background:rgba(255,255,255,0.72);
+
+  border:1px solid rgba(255,255,255,0.55);
+
+  backdrop-filter:blur(20px);
+
+  border-radius:34px;
+
+  padding:34px;
+
+  box-shadow:var(--shadow);
 }
 
 .avatar{
-  width:140px;
-  height:140px;
+
+  width:150px;
+  height:150px;
 
   border-radius:50%;
-
-  margin:0 auto 24px;
 
   background:linear-gradient(135deg,var(--blue),var(--sky));
 
   padding:5px;
+
+  margin:0 auto 24px;
 }
 
 .avatar img{
+
   width:100%;
   height:100%;
+
   border-radius:50%;
   object-fit:cover;
-  background:white;
 }
 
 .profile-name{
+
   text-align:center;
-  font-size:28px;
+
+  font-size:30px;
   font-weight:800;
+
   margin-bottom:8px;
 }
 
-.profile-user{
+.profile-role{
+
   text-align:center;
   color:var(--sky);
+
   font-weight:600;
-  margin-bottom:24px;
+
+  margin-bottom:26px;
+}
+
+.profile-bio{
+
+  text-align:center;
+
+  line-height:1.8;
+
+  color:var(--muted);
+
+  margin-bottom:28px;
 }
 
 .info-box{
+
   display:flex;
   flex-direction:column;
   gap:14px;
+
+  margin-bottom:28px;
 }
 
 .info-item{
+
   background:white;
-  border-radius:16px;
-  padding:14px 16px;
+
+  border-radius:18px;
+
+  padding:15px 18px;
 
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:14px;
 
   border:1px solid rgba(37,99,235,0.06);
 }
@@ -348,51 +451,107 @@ nav{
   font-size:14px;
 }
 
-/* ===== SECTION ===== */
+.cv-box{
+
+  background:linear-gradient(135deg,#2563eb,#0ea5e9);
+
+  color:white;
+
+  padding:24px;
+
+  border-radius:24px;
+}
+
+.cv-box h3{
+
+  font-size:22px;
+
+  margin-bottom:10px;
+}
+
+.cv-box p{
+
+  line-height:1.8;
+
+  margin-bottom:20px;
+
+  opacity:0.95;
+}
+
+.cv-btn{
+
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+
+  background:white;
+  color:var(--blue);
+
+  text-decoration:none;
+
+  padding:14px 22px;
+
+  border-radius:16px;
+
+  font-weight:700;
+}
+
+/* ===== SECTIONS ===== */
 
 .section{
-  padding:100px 24px;
+  padding:110px 24px;
 }
 
 .container{
-  max-width:1200px;
+  max-width:1280px;
   margin:auto;
 }
 
 .section-title{
-  font-size:48px;
+
+  font-size:54px;
   font-weight:900;
+
   margin-bottom:18px;
 
   background:linear-gradient(135deg,var(--blue),var(--sky));
+
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
 .section-desc{
+
   color:var(--muted);
-  line-height:1.8;
+
+  line-height:1.9;
+
+  max-width:900px;
+
   margin-bottom:60px;
 }
 
 /* ===== CARDS ===== */
 
 .cards{
+
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
   gap:24px;
 }
 
 .card{
+
   background:var(--card);
 
   border:1px solid var(--border);
 
-  border-radius:28px;
-
-  padding:28px;
-
   backdrop-filter:blur(20px);
+
+  border-radius:30px;
+
+  padding:32px;
 
   transition:0.35s;
 
@@ -404,64 +563,144 @@ nav{
 }
 
 .card-icon{
-  width:64px;
-  height:64px;
 
-  border-radius:18px;
+  width:70px;
+  height:70px;
+
+  border-radius:20px;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  font-size:28px;
+  font-size:32px;
 
-  margin-bottom:22px;
+  margin-bottom:24px;
 
   background:linear-gradient(135deg,#dbeafe,#e0f2fe);
 }
 
 .card h3{
+
   font-size:24px;
-  margin-bottom:12px;
+
+  margin-bottom:14px;
 }
 
 .card p{
+
   color:var(--muted);
-  line-height:1.8;
-  margin-bottom:24px;
+
+  line-height:1.9;
+
+  margin-bottom:22px;
 }
 
 .card a{
+
   text-decoration:none;
+
   color:var(--blue);
+
   font-weight:700;
 }
 
-/* ===== SOCIALS ===== */
+/* ===== TIMELINE ===== */
 
-.socials{
+.timeline{
+
   display:flex;
-  flex-wrap:wrap;
-  gap:18px;
+  flex-direction:column;
+  gap:24px;
 }
 
-.social{
-  display:flex;
-  align-items:center;
-  gap:12px;
+.timeline-item{
 
-  padding:16px 24px;
+  background:rgba(255,255,255,0.7);
+
+  border:1px solid var(--border);
+
+  padding:28px;
+
+  border-radius:28px;
+
+  backdrop-filter:blur(20px);
+
+  box-shadow:var(--shadow);
+}
+
+.timeline-year{
+
+  color:var(--blue);
+
+  font-weight:800;
+
+  margin-bottom:12px;
+}
+
+.timeline-item h3{
+
+  margin-bottom:12px;
+}
+
+.timeline-item p{
+
+  line-height:1.9;
+
+  color:var(--muted);
+}
+
+/* ===== SKILLS ===== */
+
+.skills{
+
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+}
+
+.skill{
+
+  padding:14px 22px;
+
+  border-radius:999px;
 
   background:white;
 
-  border-radius:18px;
-
-  text-decoration:none;
-  color:var(--text);
+  border:1px solid rgba(37,99,235,0.08);
 
   font-weight:700;
+}
+
+/* ===== CONTACT ===== */
+
+.socials{
+
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+  gap:20px;
+}
+
+.social{
+
+  display:flex;
+  align-items:center;
+  gap:16px;
+
+  padding:24px;
+
+  border-radius:24px;
+
+  background:white;
+
+  text-decoration:none;
+
+  color:var(--text);
 
   transition:0.3s;
+
+  box-shadow:var(--shadow);
 }
 
 .social:hover{
@@ -471,7 +710,9 @@ nav{
 /* ===== FOOTER ===== */
 
 footer{
-  padding:50px 24px;
+
+  padding:60px 24px;
+
   text-align:center;
 
   color:var(--muted);
@@ -479,37 +720,42 @@ footer{
 
 /* ===== ANIM ===== */
 
+.hero-left,
+.profile-card{
+
+  animation:fadeUp 1s ease;
+}
+
 @keyframes fadeUp{
+
   from{
     opacity:0;
     transform:translateY(40px);
   }
+
   to{
     opacity:1;
     transform:none;
   }
+
 }
 
 /* ===== MOBILE ===== */
 
-@media(max-width:980px){
+@media(max-width:1100px){
 
   .hero-inner{
     grid-template-columns:1fr;
   }
 
-  .hero h1{
-    font-size:54px;
-  }
-
   .profile-card{
-    max-width:500px;
+    max-width:540px;
     margin:auto;
   }
 
 }
 
-@media(max-width:700px){
+@media(max-width:768px){
 
   nav{
     padding:0 18px;
@@ -520,16 +766,26 @@ footer{
   }
 
   .hero h1{
-    font-size:42px;
+    font-size:52px;
+  }
+
+  .hero-role{
+    font-size:22px;
   }
 
   .section-title{
-    font-size:36px;
+    font-size:38px;
+  }
+
+  .hero-stats{
+    grid-template-columns:1fr;
   }
 
 }
+
 </style>
 </head>
+
 <body>
 
 <div class="bg-grid"></div>
@@ -547,13 +803,23 @@ footer{
   </div>
 
   <div class="nav-links">
+
     <a href="#about">About</a>
+
     <a href="#projects">Projects</a>
+
+    <a href="#journey">Journey</a>
+
+    <a href="#skills">Skills</a>
+
     <a href="#contact">Contact</a>
 
-    <a href="./study-sharing/" class="study-btn">
-      📚 Study Sharing
+    <a href="./assets/CV.pdf"
+       target="_blank"
+       class="nav-btn">
+       📄 Download CV
     </a>
+
   </div>
 
 </nav>
@@ -569,7 +835,7 @@ footer{
     <div class="hero-left">
 
       <div class="badge">
-        🚀 Building impactful digital products
+        🚀 Building modern digital products & intelligent systems
       </div>
 
       <h1>
@@ -578,36 +844,91 @@ footer{
       </h1>
 
       <div class="hero-role">
+
         💻 Software Engineer ·
         <span>AI & Machine Learning Enthusiast</span>
+
       </div>
 
       <p class="hero-desc">
-        Passionate about web development, cloud computing,
-        artificial intelligence and building modern digital experiences.
+
+        Xin chào 👋 mình là Trường Giang,
+        sinh viên Công nghệ thông tin đam mê xây dựng các hệ thống hiện đại,
+        web applications, AI applications và các sản phẩm có giá trị thực tế.
+
         <br><br>
 
-        Hiện mình đang phát triển các dự án cá nhân về:
-        Study Sharing Platform, AI Applications,
-        Web Systems và Healthcare Technology.
+        Hiện tại mình đang tập trung nghiên cứu và phát triển:
+        Fullstack Web Development, Cloud Computing,
+        Artificial Intelligence, Healthcare Technology
+        và các nền tảng hỗ trợ học tập cho sinh viên.
+
+        <br><br>
+
+        Mục tiêu của mình là trở thành Software Engineer có khả năng
+        xây dựng sản phẩm hoàn chỉnh từ UI/UX,
+        Backend, Database cho đến AI Integration.
+
       </p>
 
       <div class="hero-buttons">
 
-        <a href="./study-sharing/" class="btn btn-primary">
-          📚 Open Study Sharing
+        <a href="./assets/CV.pdf"
+           target="_blank"
+           class="btn btn-primary">
+
+           📄 View CV
+
         </a>
 
         <a href="https://github.com/Giangvp689"
            target="_blank"
            class="btn btn-white">
+
            💻 GitHub
+
         </a>
 
-        <a href="#contact"
+        <a href="#projects"
            class="btn btn-white">
-           ✉️ Contact
+
+           🚀 My Projects
+
         </a>
+
+      </div>
+
+      <div class="hero-stats">
+
+        <div class="stat">
+
+          <h3>3+</h3>
+
+          <p>
+            Main Technology Fields
+          </p>
+
+        </div>
+
+        <div class="stat">
+
+          <h3>10+</h3>
+
+          <p>
+            Personal Learning Projects
+          </p>
+
+        </div>
+
+        <div class="stat">
+
+          <h3>24/7</h3>
+
+          <p>
+            Passion For Technology
+          </p>
+
+        </div>
 
       </div>
 
@@ -618,16 +939,26 @@ footer{
     <div class="profile-card">
 
       <div class="avatar">
+
         <img src="https://avatars.githubusercontent.com/u/108120903?v=4">
+
       </div>
 
       <div class="profile-name">
         Trần Trường Giang
       </div>
 
-      <div class="profile-user">
-        Giangvp689 · he/him
+      <div class="profile-role">
+        Software Engineer · AI Enthusiast
       </div>
+
+      <p class="profile-bio">
+
+        Passionate about technology,
+        modern web systems, AI applications,
+        cloud architecture và xây dựng các sản phẩm hữu ích cho cộng đồng.
+
+      </p>
 
       <div class="info-box">
 
@@ -637,13 +968,18 @@ footer{
         </div>
 
         <div class="info-item">
-          💼
-          <span>Freelance Software Engineer</span>
+          🎓
+          <span>Information Technology Student</span>
         </div>
 
         <div class="info-item">
-          👥
-          <span>22 followers · 1 following</span>
+          💼
+          <span>Freelance Developer & Personal Projects Builder</span>
+        </div>
+
+        <div class="info-item">
+          🤖
+          <span>AI · Machine Learning · Fullstack Development</span>
         </div>
 
         <div class="info-item">
@@ -655,6 +991,29 @@ footer{
           📱
           <span>0377446300</span>
         </div>
+
+      </div>
+
+      <div class="cv-box">
+
+        <h3>
+          📄 Professional Resume
+        </h3>
+
+        <p>
+
+          Xem chi tiết kinh nghiệm,
+          kỹ năng, công nghệ và các dự án mình đã thực hiện.
+
+        </p>
+
+        <a href="./assets/CV.pdf"
+           target="_blank"
+           class="cv-btn">
+
+           Open CV →
+
+        </a>
 
       </div>
 
@@ -675,45 +1034,28 @@ footer{
     </h2>
 
     <p class="section-desc">
-      Mình là sinh viên Công nghệ thông tin đam mê phát triển sản phẩm số,
-      lập trình web, AI và xây dựng các hệ thống hữu ích cho sinh viên.
+
+      Mình là sinh viên Công nghệ thông tin với định hướng trở thành
+      Software Engineer chuyên về Web Systems và Artificial Intelligence.
+
       <br><br>
 
-      Mục tiêu của mình là tạo ra các sản phẩm thực tế,
-      hiện đại và có thể phục vụ cộng đồng.
+      Mình yêu thích việc xây dựng các hệ thống hiện đại,
+      tối ưu trải nghiệm người dùng và giải quyết các bài toán thực tế bằng công nghệ.
+
+      <br><br>
+
+      Ngoài lập trình web,
+      mình còn quan tâm đến:
+      Machine Learning, Deep Learning,
+      Cloud Infrastructure,
+      Healthcare Technology,
+      GIS Applications
+      và System Design.
+
     </p>
 
     <div class="cards">
-
-      <div class="card">
-
-        <div class="card-icon">
-          🤖
-        </div>
-
-        <h3>Artificial Intelligence</h3>
-
-        <p>
-          Nghiên cứu Machine Learning, Deep Learning,
-          AI Applications và các hệ thống thông minh.
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <div class="card-icon">
-          ☁️
-        </div>
-
-        <h3>Cloud Computing</h3>
-
-        <p>
-          Tìm hiểu kiến trúc cloud,
-          scalable systems và deployment hiện đại.
-        </p>
-
-      </div>
 
       <div class="card">
 
@@ -724,8 +1066,53 @@ footer{
         <h3>Modern Web Development</h3>
 
         <p>
-          Xây dựng giao diện web hiện đại,
-          animation đẹp và trải nghiệm người dùng chuyên nghiệp.
+
+          Xây dựng giao diện hiện đại,
+          responsive UI,
+          animation đẹp,
+          backend systems,
+          API integration
+          và trải nghiệm người dùng chuyên nghiệp.
+
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-icon">
+          🤖
+        </div>
+
+        <h3>Artificial Intelligence</h3>
+
+        <p>
+
+          Nghiên cứu Machine Learning,
+          Deep Learning,
+          AI Applications,
+          Computer Vision
+          và các hệ thống thông minh.
+
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-icon">
+          ☁️
+        </div>
+
+        <h3>Cloud & System Design</h3>
+
+        <p>
+
+          Tìm hiểu kiến trúc hệ thống,
+          scalable infrastructure,
+          deployment hiện đại
+          và cloud computing platforms.
+
         </p>
 
       </div>
@@ -747,7 +1134,9 @@ footer{
     </h2>
 
     <p class="section-desc">
-      Một vài dự án nổi bật mình đang phát triển.
+
+      Một vài dự án và hướng nghiên cứu nổi bật mình đang phát triển.
+
     </p>
 
     <div class="cards">
@@ -758,11 +1147,16 @@ footer{
           📚
         </div>
 
-        <h3>Study Sharing System</h3>
+        <h3>Study Sharing Platform</h3>
 
         <p>
-          Nền tảng chia sẻ tài liệu học tập dành cho sinh viên,
-          tích hợp giao diện hiện đại và quản lý môn học trực quan.
+
+          Hệ thống chia sẻ tài liệu học tập dành cho sinh viên,
+          hỗ trợ upload tài liệu,
+          phân loại môn học,
+          giao diện hiện đại
+          và trải nghiệm trực quan.
+
         </p>
 
         <a href="./study-sharing/">
@@ -774,14 +1168,18 @@ footer{
       <div class="card">
 
         <div class="card-icon">
-          🚀
+          🧠
         </div>
 
-        <h3>Personal Portfolio</h3>
+        <h3>AI Healthcare Projects</h3>
 
         <p>
-          Website cá nhân với phong cách hiện đại,
-          animation động và thiết kế gradient glassmorphism.
+
+          Các thử nghiệm AI và Deep Learning
+          trong hỗ trợ chẩn đoán,
+          computer vision
+          và healthcare technology applications.
+
         </p>
 
       </div>
@@ -789,17 +1187,151 @@ footer{
       <div class="card">
 
         <div class="card-icon">
-          🧠
+          🗺️
         </div>
 
-        <h3>AI Applications</h3>
+        <h3>GIS & Smart Mapping</h3>
 
         <p>
-          Các thử nghiệm và ứng dụng AI,
-          Machine Learning và chatbot systems.
+
+          Xây dựng hệ thống GIS,
+          WebGIS
+          và trực quan hóa dữ liệu không gian
+          phục vụ quản lý hạ tầng và giao thông.
+
         </p>
 
       </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- JOURNEY -->
+
+<section class="section" id="journey">
+
+  <div class="container">
+
+    <h2 class="section-title">
+      Learning Journey
+    </h2>
+
+    <p class="section-desc">
+
+      Hành trình học tập và phát triển kỹ năng công nghệ của mình.
+
+    </p>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+
+        <div class="timeline-year">
+          🚀 2023 - Present
+        </div>
+
+        <h3>
+          Fullstack & Modern Web Development
+        </h3>
+
+        <p>
+
+          Tập trung phát triển các hệ thống web hiện đại,
+          responsive UI,
+          frontend animation,
+          backend APIs
+          và database systems.
+
+        </p>
+
+      </div>
+
+      <div class="timeline-item">
+
+        <div class="timeline-year">
+          🤖 AI Research & Machine Learning
+        </div>
+
+        <h3>
+          Artificial Intelligence Learning
+        </h3>
+
+        <p>
+
+          Nghiên cứu Machine Learning,
+          Deep Learning,
+          Computer Vision
+          và xây dựng các AI Applications
+          phục vụ các bài toán thực tế.
+
+        </p>
+
+      </div>
+
+      <div class="timeline-item">
+
+        <div class="timeline-year">
+          🗺️ GIS & Spatial Technology
+        </div>
+
+        <h3>
+          GIS Applications Development
+        </h3>
+
+        <p>
+
+          Tìm hiểu hệ thống thông tin địa lý,
+          trực quan hóa dữ liệu không gian,
+          WebGIS
+          và ứng dụng GIS trong quản lý hạ tầng.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- SKILLS -->
+
+<section class="section" id="skills">
+
+  <div class="container">
+
+    <h2 class="section-title">
+      Skills & Technologies
+    </h2>
+
+    <p class="section-desc">
+
+      Các công nghệ và lĩnh vực mình đang học tập và phát triển.
+
+    </p>
+
+    <div class="skills">
+
+      <div class="skill">HTML</div>
+      <div class="skill">CSS</div>
+      <div class="skill">JavaScript</div>
+      <div class="skill">React</div>
+      <div class="skill">Node.js</div>
+      <div class="skill">Python</div>
+      <div class="skill">Machine Learning</div>
+      <div class="skill">Deep Learning</div>
+      <div class="skill">TensorFlow</div>
+      <div class="skill">Git & GitHub</div>
+      <div class="skill">Cloud Computing</div>
+      <div class="skill">Linux</div>
+      <div class="skill">GIS</div>
+      <div class="skill">QGIS</div>
+      <div class="skill">Database Systems</div>
+      <div class="skill">REST API</div>
 
     </div>
 
@@ -818,7 +1350,9 @@ footer{
     </h2>
 
     <p class="section-desc">
-      Kết nối với mình qua các nền tảng bên dưới nhé 🚀
+
+      Kết nối với mình qua các nền tảng bên dưới 🚀
+
     </p>
 
     <div class="socials">
@@ -826,29 +1360,39 @@ footer{
       <a href="https://github.com/Giangvp689"
          target="_blank"
          class="social">
+
          💻 GitHub
+
       </a>
 
       <a href="https://www.facebook.com/giag.tran.3133"
          target="_blank"
          class="social">
+
          📘 Facebook
+
       </a>
 
       <a href="mailto:Giangvp689@gmail.com"
          class="social">
+
          📧 Gmail
+
       </a>
 
       <a href="https://linkedin.com/in/giang-tr%E1%BA%A7n-b641622b9"
          target="_blank"
          class="social">
+
          💼 LinkedIn
+
       </a>
 
       <a href="tel:0377446300"
          class="social">
+
          📱 0377446300
+
       </a>
 
     </div>
@@ -858,9 +1402,10 @@ footer{
 </section>
 
 <footer>
-  © 2025 Trần Trường Giang · trg.id.vn
+
+  © 2026 Trần Trường Giang · trg.id.vn
+
 </footer>
 
 </body>
 </html>
-```
